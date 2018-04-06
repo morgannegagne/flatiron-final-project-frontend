@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../actions/auth'
 import withAuth from '../components/withAuth'
+import PlacesContainer from './PlacesContainer'
 
 class LandingContainer extends React.Component{
 
@@ -20,6 +21,7 @@ class LandingContainer extends React.Component{
       <div>
         <h1>HOME PAGE</h1>
         <button onClick={this.handleClick}>Logout</button>
+        < PlacesContainer />
       </div>
     )
   }

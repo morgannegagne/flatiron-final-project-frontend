@@ -6,9 +6,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import authReducer from './reducers/authReducer'
+import placesReducer from './reducers/placesReducer'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({auth: authReducer})
+const rootReducer = combineReducers({auth: authReducer, places: placesReducer})
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
