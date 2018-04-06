@@ -6,6 +6,11 @@ const headers = {
   Accepts: 'application/json'
 };
 
+const headersWithAuth = {
+  ...headers,
+  Authorization: localStorage.getItem('token')
+}
+
 const getWithToken = url => {
   const token = localStorage.getItem('token');
   return fetch(url, {
@@ -34,10 +39,22 @@ const signup = data => {
   .then(res => res.json())
 }
 
+const savePlace = data => {
+  return fetch(`${API_ROOT}/spots`, {
+    headers: headersWithAuth,
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+}
+
 export const adapter = {
   auth: {
     login,
     getCurrentUser,
     signup
+  },
+  places: {
+    savePlace
   }
 };

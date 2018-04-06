@@ -4,6 +4,7 @@ import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
 import PlacesSearchBox  from '../components/PlacesSearchBox'
 import OptionCard from '../components/OptionCard'
+import SpotList from '../components/SpotList'
 
 
 class PlacesContainer extends React.Component{
@@ -19,6 +20,9 @@ class PlacesContainer extends React.Component{
           containerElement={<div style={{ height: `400px` }} />}
         />
         {places}
+        <div>
+          < SpotList spots={this.props.spots}/>
+        </div>
       </div>
     )
   }
@@ -26,7 +30,8 @@ class PlacesContainer extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    options: state.places.googlePlaces
+    options: state.places.googlePlaces,
+    spots: state.places.userSpots
   }
 }
 

@@ -5,8 +5,6 @@ import Signup from './Signup'
 import Login from './Login'
 import { getUser } from './actions/auth'
 import LandingContainer from './containers/LandingContainer'
-import AuthContainer from './containers/AuthContainer'
-import withAuth from './components/withAuth'
 
 class App extends Component {
 
