@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../actions/auth'
+import withAuth from '../components/withAuth'
 
 class LandingContainer extends React.Component{
 
@@ -11,7 +12,6 @@ class LandingContainer extends React.Component{
   }
 
   handleClick = () => {
-    localStorage.removeItem('token')
     this.props.logout(this.props.history)
   }
 
@@ -25,4 +25,4 @@ class LandingContainer extends React.Component{
   }
 }
 
-export default connect(null, { logout })(LandingContainer)
+export default connect(null, { logout })(withAuth(LandingContainer))

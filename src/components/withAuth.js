@@ -1,25 +1,47 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { getUser } from '../actions/auth';
 
-export default function withAuth(Component){
+const withAuth = WrappedComponent => {
+  class AuthedComponent extends React.Component {
+    state = {
+      authCompleted: this.props.loggedIn
+    };
 
-  return (class extends React.Component{
-
-    componentDidMount(){
-      this._checkAndRedirect();
-    }
-
-    componentDidUpdate(){
-      this._checkAndRedirect();
-    }
-
-    _checkAndRedirect(){
-      if(!localStorage.getItem("token")){
-        this.props.history.push("/login")
+    componentDidMount() {
+      const token = localStorage.getItem('token')
+      if (token) {
+        this.props.getUser(token, this.props.history);
+      } else {
+        this.setState({ authCompleted: true });
       }
     }
 
-    render(){
-      return <Component {...this.props} />
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.loggedIn) {
+        this.setState({ authCompleted: true });
+      }
     }
-  })
-}
+
+    render() {
+      if (this.state.authCompleted) {
+        return this.props.loggedIn ? (
+          <WrappedComponent {...this.props} />
+        ) : (
+          <Redirect to="/login" />
+        );
+      } else {
+        return null;
+      }
+    }
+  }
+
+  const mapStateToProps = state => ({
+    loggedIn: !!state.auth.currentUser
+  });
+
+  return connect(mapStateToProps, { getUser })(AuthedComponent);
+};
+
+export default withAuth;
