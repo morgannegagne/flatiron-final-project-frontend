@@ -26,3 +26,27 @@ export const savePlace = (place) => {
     })
   }
 }
+
+export const fetchSpots = () => {
+  return (dispatch) => {
+    adapter.places.fetchSpots()
+    .then(res => {
+      dispatch({
+        type: 'LOAD_SPOTS',
+        payload: res
+      })
+    })
+  }
+}
+
+export const removeSpot = (spotId) => {
+  return (dispatch) => {
+    adapter.places.removeSpot(spotId)
+    .then(res => {
+      dispatch({
+        type: 'DELETE_SPOT',
+        payload: spotId
+      })
+    })
+  }
+}

@@ -6,12 +6,6 @@ import PlacesContainer from './PlacesContainer'
 
 class LandingContainer extends React.Component{
 
-  componentDidMount(){
-    if (!localStorage.getItem('token')){
-      this.props.history.push('/login')
-    }
-  }
-
   handleClick = () => {
     this.props.logout(this.props.history)
   }

@@ -48,6 +48,60 @@ const savePlace = data => {
   .then(res => res.json())
 }
 
+const removeSpot = id => {
+  return fetch(`${API_ROOT}/spots/${id}`, {
+    headers: headers,
+    method: 'DELETE'
+  })
+  .then(res => res.json())
+}
+
+const fetchSpots = () => {
+  return fetch(`${API_ROOT}/spots`, {
+    headers: {Authorization: localStorage.getItem('token')},
+  })
+  .then(res => res.json())
+}
+
+const fetchUsers = () => {
+  return fetch(`${API_ROOT}/users`, {
+    headers: headersWithAuth
+  }).then(res => res.json())
+}
+
+const createFriendRequest = (friend) => {
+  return fetch(`${API_ROOT}/friendships`, {
+    method: 'POST',
+    headers: headersWithAuth,
+    body: JSON.stringify({friend_id: friend})
+  }).then(res => res.json())
+}
+
+const cancelFriendRequest = (friend) => {
+  return fetch(`${API_ROOT}/friendships/delete`, {
+    method: 'POST',
+    headers: headersWithAuth,
+    body: JSON.stringify({friend_id: friend})
+  }).then(res => res.json())
+}
+
+const acceptFriendRequest = (friend) => {
+  return fetch(`${API_ROOT}/friendships/update`, {
+    method: 'POST',
+    headers: headersWithAuth,
+    body: JSON.stringify({friend_id: friend.id, accepted: true})
+  }).then(res => res.json())
+}
+
+const declineFriendRequest = (friend) => {
+  console.log('decline')
+  return fetch(`${API_ROOT}/friendships/update`, {
+    method: 'POST',
+    headers: headersWithAuth,
+    body: JSON.stringify({friend_id: friend.id, accepted: false})
+  }).then(res => res.json())
+}
+
 export const adapter = {
   auth: {
     login,
@@ -55,6 +109,15 @@ export const adapter = {
     signup
   },
   places: {
-    savePlace
+    savePlace,
+    removeSpot,
+    fetchSpots,
+  },
+  friends: {
+    fetchUsers,
+    createFriendRequest,
+    cancelFriendRequest,
+    acceptFriendRequest,
+    declineFriendRequest
   }
 };
