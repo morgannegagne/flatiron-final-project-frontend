@@ -40,6 +40,7 @@ export const cancelFriendRequest = (friend) => {
     })
   }
 }
+
 export const acceptFriendRequest = (friend) => {
   return (dispatch) => {
     adapter.friends.acceptFriendRequest(friend)
@@ -52,6 +53,7 @@ export const acceptFriendRequest = (friend) => {
     })
   }
 }
+
 export const declineFriendRequest = (friend) => {
   return (dispatch) => {
     adapter.friends.declineFriendRequest(friend)
