@@ -5,6 +5,7 @@ import UserCard from '../components/UserCard'
 import RequestCard from '../components/RequestCard'
 import PendingFriendRequestCard from '../components/PendingFriendRequestCard'
 import { fetchUsers } from '../actions/friends'
+import NavBar from '../components/NavBar'
 
 class FriendsContainer extends React.Component{
 
@@ -14,11 +15,12 @@ class FriendsContainer extends React.Component{
 
   render(){
     const users = this.props.unfriended.map( u => <UserCard key={u.id} {...u}/>)
-    const requests = this.props.requestedFriends.map( r => <RequestCard friend={r}/>)
+    const requests = this.props.requestedFriends.map( r => <RequestCard key={`request-${r.id}`} friend={r}/>)
     const pendingRequests = this.props.pendingFriends.map(f => < PendingFriendRequestCard key={`pending-${f.id}`} friend={f} />)
-    const acceptedFriends = this.props.acceptedFriends.map(f => <div>{f.username}</div>)
+    const acceptedFriends = this.props.acceptedFriends.map(f => <div key={`accepted-${f.id}`}>{f.username}</div>)
     return(
       <div>
+        < NavBar />
         <h1>SENT REQUESTS</h1>
         {requests}
         <h1>PENDING REQUESTS</h1>

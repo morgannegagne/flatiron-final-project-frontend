@@ -50,3 +50,15 @@ export const removeSpot = (spotId) => {
     })
   }
 }
+
+export const addComment = (spotId, text) => {
+  return (dispatch) => {
+    adapter.places.addComment(spotId, text)
+    .then(res => {
+      dispatch({
+        type: 'ADD_COMMENT',
+        payload: res
+      })
+    })
+  }
+}

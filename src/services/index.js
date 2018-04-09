@@ -94,12 +94,20 @@ const acceptFriendRequest = (friend) => {
 }
 
 const declineFriendRequest = (friend) => {
-  console.log('decline')
   return fetch(`${API_ROOT}/friendships/update`, {
     method: 'POST',
     headers: headersWithAuth,
     body: JSON.stringify({friend_id: friend.id, accepted: false})
   }).then(res => res.json())
+}
+
+const addComment = (spot_id, text) => {
+  return fetch(`${API_ROOT}/comments`, {
+    method:'POST',
+    headers: headersWithAuth,
+    body: JSON.stringify({comment: {spot_id, text}})
+  })
+  .then(res => res.json())
 }
 
 export const adapter = {
@@ -112,6 +120,7 @@ export const adapter = {
     savePlace,
     removeSpot,
     fetchSpots,
+    addComment
   },
   friends: {
     fetchUsers,

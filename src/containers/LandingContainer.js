@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../actions/auth'
-import withAuth from '../components/withAuth'
 import PlacesContainer from './PlacesContainer'
+import MapContainer from './MapContainer'
+import NavBar from '../components/NavBar'
+import withAuth from '../components/withAuth'
 
 class LandingContainer extends React.Component{
 
@@ -13,8 +15,10 @@ class LandingContainer extends React.Component{
   render(){
     return(
       <div>
+        < NavBar />
         <h1>HOME PAGE</h1>
         <button onClick={this.handleClick}>Logout</button>
+        < MapContainer />
         < PlacesContainer />
       </div>
     )

@@ -4,7 +4,6 @@ import SpotCard from './SpotCard'
 
 const SpotList = props => {
   const { spots } = props
-
   const spotCards = spots.map(spot => <SpotCard key={spot.id} {...spot}/>)
   return(
     <div>
