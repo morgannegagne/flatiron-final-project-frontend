@@ -16,7 +16,6 @@ export function getUser(jwt, history){
   return function(dispatch){
     adapter.auth.getCurrentUser()
     .then(res => {
-      console.log(res)
       dispatch({type: 'GET_USER', payload: res})
     })
   }

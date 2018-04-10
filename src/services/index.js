@@ -34,7 +34,7 @@ const signup = data => {
   .then(res => res.json())
 }
 
-const savePlace = data => {
+const saveSpot = data => {
   return fetch(`${API_ROOT}/spots`, {
     headers: {
       ...headers,
@@ -136,7 +136,7 @@ export const adapter = {
     signup
   },
   places: {
-    savePlace,
+    saveSpot,
     removeSpot,
     fetchSpots,
     addComment

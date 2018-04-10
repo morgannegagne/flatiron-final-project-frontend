@@ -1,23 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { savePlace } from '../actions/places'
+import { saveSpot } from '../actions/places'
 
-const OptionCard = props => {
-  const { place } = props
+class OptionCard extends React.Component {
 
-  const handleClick = () => {
-    props.savePlace(place)
+  state = {
+    valid: true,
+    type: 'save'
   }
 
-  return(
-    <div>
-      <h1>{place.name}</h1>
-      <p>{place.formatted_address}</p>
-      <p>{place.formatted_phone_number}</p>
-      <button onClick={handleClick}>Add to your places!</button>
-    </div>
-  )
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.saveSpot(this.props.place, this.state.type)
+  }
 
+  handleChange = (e) => {
+    this.setState({type: e.target.value})
+  }
+
+  render(){
+    const { place } = this.props
+    return(
+      <div>
+        <h1>{place.name}</h1>
+        <p>{place.formatted_address}</p>
+        <p>{place.formatted_phone_number}</p>
+        <form onSubmit={this.handleSubmit}>
+          <input type="radio" value="save" onChange={this.handleChange} name="type" defaultChecked/> Save
+          <input type="radio" value="favorite" onChange={this.handleChange} name="type"/> Favorite
+          <button onClick={this.handleSubmit}>Add to your Spots!</button>
+        </form>
+      </div>
+    )
+  }
 };
 
-export default connect(null, { savePlace })(OptionCard);
+export default connect(null, { saveSpot })(OptionCard);

@@ -8,9 +8,15 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import authReducer from './reducers/authReducer'
 import placesReducer from './reducers/placesReducer'
 import friendsReducer from './reducers/friendsReducer'
+import mapReducer from './reducers/mapReducer'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({auth: authReducer, places: placesReducer, friends: friendsReducer})
+const rootReducer = combineReducers({
+  auth: authReducer,
+  places: placesReducer,
+  friends: friendsReducer,
+  map: mapReducer
+})
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(

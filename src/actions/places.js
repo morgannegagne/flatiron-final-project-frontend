@@ -7,17 +7,20 @@ export function updatePlaces(places){
   }
 }
 
-export const savePlace = (place) => {
+export const saveSpot= (place, type) => {
   return (dispatch) => {
-    const data = { place: {
-      google_uid: place.place_id,
-      address: place.formatted_address,
-      phone_number: place.formatted_phone_number,
-      name: place.name,
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng()
-    }}
-    adapter.places.savePlace(data)
+    const data = {
+      place: {
+        google_uid: place.place_id,
+        address: place.formatted_address,
+        phone_number: place.formatted_phone_number,
+        name: place.name,
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng()
+      },
+      type
+  }
+    adapter.places.saveSpot(data)
     .then(res => {
       dispatch({
         type: 'ADD_SPOT',
