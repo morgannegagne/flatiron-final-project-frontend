@@ -65,15 +65,3 @@ export const declineFriendRequest = (friend) => {
     })
   }
 }
-
-export const fetchFriendsSpots = (friend) => {
-  return (dispatch) => {
-    adapter.friends.fetchFriendsSpots(friend)
-    .then( res => {
-      dispatch({
-        type: 'UPDATE_FRIENDS_SPOTS',
-        payload: res
-      })
-    })
-  }
-}

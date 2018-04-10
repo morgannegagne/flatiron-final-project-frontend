@@ -1,7 +1,9 @@
 export default function placesReducer(
   state = {
     googlePlaces: [],
-    userSpots: []
+    userSpots: [], //need to remove ultimately
+    mapSpots: [], //need to remove ultimately
+    spots: []
   },
   action
 ){
@@ -9,24 +11,32 @@ export default function placesReducer(
     case 'UPDATE_GOOGLE_PLACES':
       return {...state, googlePlaces: action.payload}
     case 'ADD_SPOT':
-      for (let spot of state.userSpots){
+      for (let spot of state.spots){
         if (spot.place.google_uid === action.payload.place.google_uid){
           return state
         }
       }
-      return {...state, userSpots: [...state.userSpots, action.payload]}
+      return {
+        ...state,
+        spots: [...state.spots, action.payload],
+      }
     case 'DELETE_SPOT':
-      return {...state, userSpots: [...state.userSpots].filter(spot => spot.id !== action.payload)}
+      return {...state, spots: [...state.userSpots].filter(spot => spot.id !== action.payload)}
     case 'LOAD_SPOTS':
-      return {...state, userSpots: action.payload}
+      return {...state, spots: action.payload}
     case 'ADD_COMMENT':
-      return {...state, userSpots: [...state.userSpots].map(spot =>{
+      return {...state, spots: [...state.userSpots].map(spot =>{
         if (spot.id == action.payload.spot_id){
           return {...spot, comments: [...spot.comments, action.payload]}
         } else {
           return spot
         }
       })}
+    case 'UPDATE_MAP_SPOTS':
+      return {
+        ...state,
+        spots: action.payload
+      }
     default:
       return state
   }

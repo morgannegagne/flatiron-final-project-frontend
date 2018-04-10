@@ -1,16 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchFriendsSpots } from '../actions/friends'
+import { fetchMapSpots } from '../actions/places'
 import Map from '../components/Map'
 
 class MapContainer extends React.Component{
 
   state = {
     loaded: false
-  }
-
-  componentDidMount(){
-    this.props.fetchFriendsSpots(this.props.user.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -42,9 +38,9 @@ class MapContainer extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  spots: state.friends.friendSpots,
+  spots: state.places.spots,
   currentUser: state.auth.currentUser,
 })
 
 
-export default connect(mapStateToProps, { fetchFriendsSpots } )(MapContainer)
+export default connect(mapStateToProps, { fetchMapSpots } )(MapContainer)

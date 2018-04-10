@@ -10,7 +10,7 @@ import withAuth from '../components/withAuth'
 class LandingContainer extends React.Component{
 
   componentDidMount(){
-    this.props.fetchSpots();
+    this.props.fetchSpots(this.props.currentUser.id);
   }
 
   handleClick = () => {
@@ -23,7 +23,7 @@ class LandingContainer extends React.Component{
         < NavBar />
         <h1>HOME PAGE</h1>
         <button onClick={this.handleClick}>Logout</button>
-        < MapContainer user={this.props.currentUser}/>
+        < MapContainer />
         < PlacesContainer />
       </div>
     );
@@ -32,8 +32,7 @@ class LandingContainer extends React.Component{
 
 const mapStateToProps = state => {
   return {
-    spots: state.places.userSpots,
-    currentUser: state.auth.currentUser
+    spots: state.places.spots,
   }
 }
 

@@ -54,9 +54,9 @@ const removeSpot = id => {
   .then(res => res.json())
 }
 
-const fetchSpots = () => {
+const fetchSpots = (id) => {
   return fetch(`${API_ROOT}/spots`, {
-    headers: {Authorization: localStorage.getItem('token')},
+    headers: {Authorization: id},
   })
   .then(res => res.json())
 }
@@ -120,10 +120,10 @@ const addComment = (spot_id, text) => {
   .then(res => res.json())
 }
 
-const fetchFriendsSpots = (friendId) => {
+const fetchMapSpots = (userId) => {
   return fetch(`${API_ROOT}/spots`, {
     headers: {
-      Authorization: friendId
+      Authorization: userId
     }
   })
   .then(res => res.json())
@@ -147,6 +147,6 @@ export const adapter = {
     cancelFriendRequest,
     acceptFriendRequest,
     declineFriendRequest,
-    fetchFriendsSpots
+    fetchMapSpots
   }
 };

@@ -31,7 +31,7 @@ class PlacesContainer extends React.Component{
 const mapStateToProps = state => {
   return {
     options: state.places.googlePlaces,
-    spots: state.places.userSpots
+    spots: state.places.spots
   }
 }
 

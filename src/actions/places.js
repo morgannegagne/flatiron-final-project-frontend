@@ -27,9 +27,9 @@ export const savePlace = (place) => {
   }
 }
 
-export const fetchSpots = () => {
+export const fetchSpots = (id) => {
   return (dispatch) => {
-    adapter.places.fetchSpots()
+    adapter.places.fetchSpots(id)
     .then(res => {
       dispatch({
         type: 'LOAD_SPOTS',
@@ -57,6 +57,18 @@ export const addComment = (spotId, text) => {
     .then(res => {
       dispatch({
         type: 'ADD_COMMENT',
+        payload: res
+      })
+    })
+  }
+}
+
+export const fetchMapSpots = (user) => {
+  return (dispatch) => {
+    adapter.friends.fetchMapSpots(user)
+    .then( res => {
+      dispatch({
+        type: 'UPDATE_MAP_SPOTS',
         payload: res
       })
     })

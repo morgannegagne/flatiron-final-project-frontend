@@ -1,12 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MapContainer from './MapContainer'
-import { fetchUsers } from '../actions/friends'
-import { getUser } from '../actions/auth'
 import withAuth from '../components/withAuth'
 import NavBar from '../components/NavBar'
+import { fetchSpots } from '../actions/places'
 
 class ProfilePageContainer extends React.Component {
+
+  state = {
+    loaded: false
+  }
+
+  componentWillReceiveProps(next){
+    if (next.user){
+      this.props.fetchSpots(next.user.id)
+    }
+  }
 
   render(){
     return(
@@ -16,7 +25,7 @@ class ProfilePageContainer extends React.Component {
           <div>
             < NavBar />
             <h1> {this.props.user.username} PROFILE PAGE!</h1>
-            <MapContainer user={this.props.user}/>
+            <MapContainer />
           </div> :
           'loading...'
         }
@@ -25,12 +34,4 @@ class ProfilePageContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser,
-    allUsers: state.friends.allUsers,
-    spots: state.friends.friendSpots
-  }
-}
-
-export default connect(mapStateToProps, { getUser, fetchUsers })(withAuth(ProfilePageContainer))
+export default connect(null, { fetchSpots })(withAuth(ProfilePageContainer))
