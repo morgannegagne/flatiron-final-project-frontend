@@ -1,9 +1,11 @@
 export default function friendsReducer(
   state = {
+    allUsers: [],
     unfriended: [],
     pendingFriends: [],
     requestedFriends: [],
-    acceptedFriends: []
+    acceptedFriends: [],
+    friendSpots: null
   },
   action
 ){
@@ -11,6 +13,7 @@ export default function friendsReducer(
     case 'GET_USERS':
       return {
         ...state,
+        allUsers: action.payload.all,
         unfriended: action.payload.unfriended,
         pendingFriends: action.payload.pendingFriends,
         requestedFriends: action.payload.requestedFriends,
@@ -39,6 +42,11 @@ export default function friendsReducer(
         ...state,
         pendingFriends: [...state.pendingFriends].filter(friend => friend.id !== action.payload.id),
         unfriended: [...state.unfriended, action.payload ]
+      }
+    case 'UPDATE_FRIENDS_SPOTS':
+      return {
+        ...state,
+        friendSpots: action.payload
       }
     default:
       return state

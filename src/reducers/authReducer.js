@@ -1,6 +1,7 @@
 export default function authReducer(
   state = {
     currentUser: null,
+    allUsers: []
   },
   action
 ){

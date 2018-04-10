@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getUser } from '../actions/auth';
+import { fetchUsers } from '../actions/friends'
+
 
 const withAuth = WrappedComponent => {
   class AuthedComponent extends React.Component {
@@ -13,6 +15,7 @@ const withAuth = WrappedComponent => {
       const token = localStorage.getItem('token')
       if (token) {
         this.props.getUser(token, this.props.history);
+        this.props.fetchUsers()
       } else {
         this.setState({ authCompleted: true });
       }
@@ -38,10 +41,12 @@ const withAuth = WrappedComponent => {
   }
 
   const mapStateToProps = state => ({
-    loggedIn: !!state.auth.currentUser
+    loggedIn: !!state.auth.currentUser,
+    currentUser: state.auth.currentUser,
+    allUsers: state.friends.allUsers
   });
 
-  return connect(mapStateToProps, { getUser })(AuthedComponent);
+  return connect(mapStateToProps, { getUser, fetchUsers })(AuthedComponent);
 };
 
 export default withAuth;

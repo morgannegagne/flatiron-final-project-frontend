@@ -7,6 +7,7 @@ export const fetchUsers = () => {
       dispatch({
         type: 'GET_USERS',
         payload: {
+          all: res.all,
           unfriended: res.unfriended,
           pendingFriends: res.pending_friends,
           requestedFriends: res.requested_friends,
@@ -45,7 +46,6 @@ export const acceptFriendRequest = (friend) => {
   return (dispatch) => {
     adapter.friends.acceptFriendRequest(friend)
     .then(res => {
-      console.log(res)
       dispatch({
         type: 'ACCEPT_FRIEND_REQUEST',
         payload: res
@@ -60,6 +60,18 @@ export const declineFriendRequest = (friend) => {
     .then(res => {
       dispatch({
         type: 'DECLINE_FRIEND_REQUEST',
+        payload: res
+      })
+    })
+  }
+}
+
+export const fetchFriendsSpots = (friend) => {
+  return (dispatch) => {
+    adapter.friends.fetchFriendsSpots(friend)
+    .then( res => {
+      dispatch({
+        type: 'UPDATE_FRIENDS_SPOTS',
         payload: res
       })
     })

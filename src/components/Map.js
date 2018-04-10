@@ -15,10 +15,4 @@ const Map = withScriptjs(withGoogleMap( (props) => {
   )
 }))
 
-const mapStateToProps = state => {
-  return {
-    spots: state.places.userSpots
-  }
-}
-
-export default connect(mapStateToProps)(Map)
+export default connect(null)(Map)

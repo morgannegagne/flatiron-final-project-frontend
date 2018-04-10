@@ -6,20 +6,15 @@ const headers = {
   Accepts: 'application/json'
 };
 
-const headersWithAuth = {
-  ...headers,
-  Authorization: localStorage.getItem('token')
-}
-
 const getWithToken = url => {
   const token = localStorage.getItem('token');
   return fetch(url, {
     headers: { Authorization: token }
-  }).then(res => res.json());
+  }).then(res => res.json())
 };
 
 const getCurrentUser = () => {
-  return getWithToken(`${BASE_URL}/current_user`);
+  return getWithToken(`${BASE_URL}/current_user`)
 };
 
 const login = data => {
@@ -32,7 +27,7 @@ const login = data => {
 
 const signup = data => {
   return fetch(`${API_ROOT}/users`,{
-    headers: headers,
+    headers,
     method: 'POST',
     body: JSON.stringify(data)
   })
@@ -41,7 +36,10 @@ const signup = data => {
 
 const savePlace = data => {
   return fetch(`${API_ROOT}/spots`, {
-    headers: headersWithAuth,
+    headers: {
+      ...headers,
+      Authorization: localStorage.getItem('token')
+    },
     method: 'POST',
     body: JSON.stringify(data)
   })
@@ -65,14 +63,18 @@ const fetchSpots = () => {
 
 const fetchUsers = () => {
   return fetch(`${API_ROOT}/users`, {
-    headers: headersWithAuth
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    }
   }).then(res => res.json())
 }
 
 const createFriendRequest = (friend) => {
   return fetch(`${API_ROOT}/friendships`, {
     method: 'POST',
-    headers: headersWithAuth,
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    },
     body: JSON.stringify({friend_id: friend})
   }).then(res => res.json())
 }
@@ -80,7 +82,9 @@ const createFriendRequest = (friend) => {
 const cancelFriendRequest = (friend) => {
   return fetch(`${API_ROOT}/friendships/delete`, {
     method: 'POST',
-    headers: headersWithAuth,
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    },
     body: JSON.stringify({friend_id: friend})
   }).then(res => res.json())
 }
@@ -88,7 +92,9 @@ const cancelFriendRequest = (friend) => {
 const acceptFriendRequest = (friend) => {
   return fetch(`${API_ROOT}/friendships/update`, {
     method: 'POST',
-    headers: headersWithAuth,
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    },
     body: JSON.stringify({friend_id: friend.id, accepted: true})
   }).then(res => res.json())
 }
@@ -96,7 +102,9 @@ const acceptFriendRequest = (friend) => {
 const declineFriendRequest = (friend) => {
   return fetch(`${API_ROOT}/friendships/update`, {
     method: 'POST',
-    headers: headersWithAuth,
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    },
     body: JSON.stringify({friend_id: friend.id, accepted: false})
   }).then(res => res.json())
 }
@@ -104,8 +112,19 @@ const declineFriendRequest = (friend) => {
 const addComment = (spot_id, text) => {
   return fetch(`${API_ROOT}/comments`, {
     method:'POST',
-    headers: headersWithAuth,
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    },
     body: JSON.stringify({comment: {spot_id, text}})
+  })
+  .then(res => res.json())
+}
+
+const fetchFriendsSpots = (friendId) => {
+  return fetch(`${API_ROOT}/spots`, {
+    headers: {
+      Authorization: friendId
+    }
   })
   .then(res => res.json())
 }
@@ -127,6 +146,7 @@ export const adapter = {
     createFriendRequest,
     cancelFriendRequest,
     acceptFriendRequest,
-    declineFriendRequest
+    declineFriendRequest,
+    fetchFriendsSpots
   }
 };

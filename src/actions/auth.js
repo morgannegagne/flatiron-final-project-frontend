@@ -16,6 +16,7 @@ export function getUser(jwt, history){
   return function(dispatch){
     adapter.auth.getCurrentUser()
     .then(res => {
+      console.log(res)
       dispatch({type: 'GET_USER', payload: res})
     })
   }
@@ -30,8 +31,8 @@ export function logIn(username, password, history){
         console.log(res.error)
       } else {
         localStorage.setItem("token", res.token)
-        dispatch({ type: "GET_USER", payload: res.user})
         history.push('/')
+        dispatch({ type: "GET_USER", payload: res.user})
       }
     })
   }

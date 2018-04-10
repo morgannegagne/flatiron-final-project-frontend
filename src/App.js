@@ -5,8 +5,10 @@ import Signup from './Signup'
 import Login from './Login'
 import { getUser } from './actions/auth'
 import { fetchSpots } from './actions/places'
+import { fetchUsers } from './actions/friends'
 import LandingContainer from './containers/LandingContainer'
 import FriendsContainer from './containers/FriendsContainer'
+import ProfilePageContainer from './containers/ProfilePageContainer'
 
 class App extends Component {
 
@@ -15,7 +17,7 @@ class App extends Component {
     if (token && !this.props.currentUser){
       this.props.getUser(token, this.props.history)
     }
-    this.props.fetchSpots()
+    this.props.fetchUsers()
   }
 
   render() {
@@ -26,6 +28,10 @@ class App extends Component {
           <Route path="/signup" render={(routerProps) => < Signup history={routerProps.history}/>} />
           <Route path="/login" render={(routerProps) => < Login history={routerProps.history}/> } />
           <Route path="/friends" render={(routerProps) => < FriendsContainer history={routerProps.history}/> } />
+          <Route path="/profiles/:username" render={(routerProps) => {
+              const user = this.props.allUsers.find(u => u.username === routerProps.match.params.username)
+              return < ProfilePageContainer user={user} />
+            }} />
         </Switch>
       </div>
     );
@@ -35,7 +41,8 @@ class App extends Component {
 function mapStateToProps(state){
   return {
     currentUser: state.auth.currentUser,
+    allUsers: state.friends.allUsers
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getUser, fetchSpots })(App));
+export default withRouter(connect(mapStateToProps, {getUser, fetchSpots, fetchUsers })(App));
