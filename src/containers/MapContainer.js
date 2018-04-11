@@ -19,13 +19,14 @@ class MapContainer extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="mapItem">
         {
           this.state.loaded ?
           <Map
+            className="mapItem"
             googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ33Uqce6yl_qY19v4fzrj4G4cmQHFkFs&v=3.exp&libraries=geometry,drawing,places'}
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `600px`, width: `600px` }} />}
+            containerElement={<div style={{ height: 600 }} />}
             mapElement={<div style={{ height: `100%` }} />}
             spots={this.props.spots}
             />

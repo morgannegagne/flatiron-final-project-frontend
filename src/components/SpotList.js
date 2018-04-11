@@ -7,7 +7,7 @@ const SpotList = props => {
   const spotCards = spots.map(spot => <SpotCard key={spot.id} {...spot}/>)
   return(
     <div>
-      <h1>HERE ARE YOUR SPOTS</h1>
+      <h1>SPOTS</h1>
       {spotCards}
     </div>
   )

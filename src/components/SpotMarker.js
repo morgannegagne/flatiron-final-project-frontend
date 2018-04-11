@@ -13,10 +13,12 @@ class SpotMarker extends React.Component {
   }
 
   componentWillReceiveProps(next){
-    if (next.activeSpot.id === this.props.spot.id){
-      this.setState({active: true})
-    } else {
-      this.setState({active: false})
+    if (next.activeSpot){
+      if (next.activeSpot.id === this.props.spot.id){
+        this.setState({active: true})
+      } else {
+        this.setState({active: false, hover: false})
+      }
     }
   }
 
@@ -29,9 +31,7 @@ class SpotMarker extends React.Component {
   }
 
   handleClick = () => {
-    console.log(this.props.updateActiveMarker)
     this.props.updateActiveMarker(this.props.spot)
-    // this.setState({hover: false, active: !this.state.active})
   }
 
   getIcon = () =>{

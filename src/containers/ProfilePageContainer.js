@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MapContainer from './MapContainer'
+import SidePanelContainer from './SidePanelContainer'
 import withAuth from '../components/withAuth'
 import NavBar from '../components/NavBar'
 import { fetchSpots } from '../actions/places'
@@ -24,9 +25,12 @@ class ProfilePageContainer extends React.Component {
           this.props.user ?
           <div>
             < NavBar />
-            <h1> {this.props.user.username} PROFILE PAGE!</h1>
-            <MapContainer />
-          </div> :
+            <div className="grid-container">
+              < SidePanelContainer />
+              < MapContainer />
+            </div>
+          </div>
+          :
           'loading...'
         }
       </div>

@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logout } from '../actions/auth'
 import { fetchSpots } from '../actions/places'
-import PlacesContainer from './PlacesContainer'
 import MapContainer from './MapContainer'
+import SidePanelContainer from './SidePanelContainer'
 import NavBar from '../components/NavBar'
 import withAuth from '../components/withAuth'
+import '../App.css'
 
 class LandingContainer extends React.Component{
 
@@ -13,18 +13,14 @@ class LandingContainer extends React.Component{
     this.props.fetchSpots(this.props.currentUser.id);
   }
 
-  handleClick = () => {
-    this.props.logout(this.props.history);
-  }
-
   render(){
     return(
       <div>
         < NavBar />
-        <h1>HOME PAGE</h1>
-        <button onClick={this.handleClick}>Logout</button>
-        < MapContainer />
-        < PlacesContainer />
+        <div className="grid-container">
+          < SidePanelContainer />
+          < MapContainer />
+        </div>
       </div>
     );
   }
@@ -36,4 +32,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetchSpots, logout })(withAuth(LandingContainer));
+export default connect(mapStateToProps, { fetchSpots })(withAuth(LandingContainer));
