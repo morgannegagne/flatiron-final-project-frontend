@@ -2,14 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 const InfoWindowCard = props => {
-  const { place } = props
-
+  const { spot } = props
   return(
     <div>
-      {place.name}
+      {
+        spot.user_id === props.currentUser.id ?
+        <div>{spot.place.name}</div>
+        :
+        <div>
+          {spot.place.name} <br></br>
+          {spot.username}
+        </div>
+      }
     </div>
   )
 
 };
 
-export default connect(null)(InfoWindowCard);
+const mapStateToProps = state => ({
+  currentUser: state.auth.currentUser
+})
+
+export default connect(mapStateToProps)(InfoWindowCard);

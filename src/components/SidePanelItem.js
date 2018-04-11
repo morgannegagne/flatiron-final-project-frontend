@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import PlacesContainer from '../containers/PlacesContainer'
 import SearchContainer from '../containers/SearchContainer'
-import FriendSearchBar from '../components/FriendSearchBar'
+import ExploreContainer from '../containers/ExploreContainer'
 
 
 class SidePanelItem extends React.Component {
@@ -14,7 +14,7 @@ class SidePanelItem extends React.Component {
       case 'add':
         return < SearchContainer />
       case 'explore':
-        return < FriendSearchBar />
+        return < ExploreContainer />
       default:
         return null
     }

@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { removeSpot, addComment, updateSpotType } from '../actions/places'
+import { removeSpot, addCommentToFriendSpot, saveFriendSpot } from '../actions/places'
 import defaultImg from '../images/default-img.gif'
 import { Icon } from 'semantic-ui-react'
-import BigHeartOutline from '../images/heart-outline.png'
-import BigStarOutline from '../images/big-star.png'
 import BigStar from '../images/big-star-filled.png'
 import BigHeart from '../images/big-heart.png'
 
@@ -22,19 +20,15 @@ class SpotPage extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.setState({text: ''})
-    this.props.addComment(this.props.id, this.state.text)
+    this.props.addCommentToFriendSpot(this.props.id, this.state.text)
   }
 
   handleChange = (e) => {
     this.setState({text: e.target.value})
   }
 
-  handleIconClick = () => {
-    if (this.props.spot_type === 'favorite'){
-      this.props.updateSpotType(this.props.id, 'save')
-    } else {
-      this.props.updateSpotType(this.props.id, 'favorite')
-    }
+  handleUserSave = () => {
+    this.props.saveFriendSpot(this.props.place, 'save', this.props.username)
   }
 
   toggleComments = () => {
@@ -46,23 +40,21 @@ class SpotPage extends React.Component {
     return(
       <div>
         <img src={defaultImg} alt="default" width="400"/>
-        <h3>{this.props.place.name}</h3>
         <div>
+          <h3>
           {
             this.props.spot_type === 'favorite' ?
-            <div>
+            <span>
               <img src={BigHeart} alt="big-heart" width={20}/>
-              <img width={20} alt="big-star-outline" onClick={this.handleIconClick} src={BigStarOutline} />
-              <span onClick={this.toggleComments}>Comments</span>
-            </div>
+            </span>
             :
-            <div>
-              <img src={BigHeartOutline} alt="big-heart-outline" onClick={this.handleIconClick} width={20}/>
+            <span>
               <img alt="big-star"width={20} src={BigStar} />
-              <span onClick={this.toggleComments}>Comments</span>
-            </div>
+            </span>
           }
-
+          {this.props.place.name}
+          <span><Icon link name="remove bookmark" onClick={this.handleUserSave}/>Save</span>
+        </h3>
         </div>
         <p><Icon name="point"/>{this.props.place.address}</p>
         <p><Icon name="phone"/>{this.props.place.phone_number}</p>
@@ -71,6 +63,7 @@ class SpotPage extends React.Component {
           <p><a href={this.props.place.website} target="_blank"><Icon name="globe"/>{this.props.place.website}</a></p>
           : null
         }
+        <Icon size="large" link name="comment outline" onClick={this.toggleComments}/> <span>({comments.length})</span>
         {
           this.state.showComments ?
           <div>
@@ -80,7 +73,6 @@ class SpotPage extends React.Component {
               <input value={this.state.text} onChange={this.handleChange} type="text"/>
               <input type="submit"/>
             </form>
-            <button onClick={this.handleClick}>DELETE SPOT :(</button>
           </div>
           :
           null
@@ -91,4 +83,4 @@ class SpotPage extends React.Component {
 
 };
 
-export default connect(null, {removeSpot, addComment, updateSpotType})(SpotPage);
+export default connect(null, {removeSpot, addCommentToFriendSpot, saveFriendSpot})(SpotPage);

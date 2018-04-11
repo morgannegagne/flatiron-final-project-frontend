@@ -4,7 +4,8 @@ export default function placesReducer(
     spots: [],
     activeSpot: null,
     activeMenu: null,
-    sidePanelActive: false
+    sidePanelActive: false,
+    activeFriendSpot: null
   },
   action
 ){
@@ -20,6 +21,8 @@ export default function placesReducer(
         sidePanelActive: true,
         googlePlaces: []
       }
+    case 'SAVE_SPOT':
+      return {...state}
     case 'DELETE_SPOT':
       return {...state, spots: [...state.spots].filter(spot => spot.id !== action.payload)}
     case 'LOAD_SPOTS':
@@ -33,6 +36,11 @@ export default function placesReducer(
         }
       }),
       activeSpot: {...state.activeSpot, comments: [...state.activeSpot.comments, action.payload]}
+    }
+    case 'ADD_COMMENT_TO_FRIEND_SPOT':
+      return {
+        ...state,
+        activeFriendSpot: {...state.activeFriendSpot, comments: [...state.activeFriendSpot.comments, action.payload]}
     }
     case 'UPDATE_MAP_SPOTS':
       return {
@@ -57,6 +65,8 @@ export default function placesReducer(
       return {...state, activeMenu: action.payload }
     case 'TOGGLE_SIDE_PANEL':
       return {...state, sidePanelActive: !state.sidePanelActive}
+    case 'UPDATE_ACTIVE_FRIEND_SPOT':
+      return {...state, activeFriendSpot: action.payload}
     default:
       return state
   }

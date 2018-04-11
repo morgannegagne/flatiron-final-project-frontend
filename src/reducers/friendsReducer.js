@@ -6,7 +6,6 @@ export default function friendsReducer(
     requestedFriends: [],
     acceptedFriends: [],
     selectedFriends: [],
-    friendSpots: []
   },
   action
 ){
@@ -19,7 +18,6 @@ export default function friendsReducer(
         pendingFriends: action.payload.pendingFriends,
         requestedFriends: action.payload.requestedFriends,
         acceptedFriends: action.payload.acceptedFriends,
-        selectedFriends: action.payload.acceptedFriends
       }
     case 'ADD_FRIEND_REQUEST':
       return {

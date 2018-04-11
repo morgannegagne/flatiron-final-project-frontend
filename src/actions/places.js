@@ -7,7 +7,26 @@ export function updatePlaces(places){
   }
 }
 
-export const saveSpot = (place, type) => {
+export const saveFriendSpot = (place, spot_type, source) => {
+  return (dispatch) => {
+    const data = {
+      place: {
+        google_uid: place.google_uid,
+        address: place.address,
+        phone_number: place.phone_number,
+        website: place.website,
+        name: place.name,
+        lat: place.lat,
+        lng: place.lng
+      },
+      spot_type,
+      source
+    }
+    adapter.places.saveSpot(data)
+  }
+}
+
+export const saveSpot = (place, spot_type) => {
   return (dispatch) => {
     const data = {
       place: {
@@ -19,7 +38,7 @@ export const saveSpot = (place, type) => {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       },
-      type
+      spot_type
   }
     adapter.places.saveSpot(data)
     .then(res => {
@@ -66,6 +85,19 @@ export const addComment = (spotId, text) => {
     })
   }
 }
+
+export const addCommentToFriendSpot = (spotId, text) => {
+  return (dispatch) => {
+    adapter.places.addComment(spotId, text)
+    .then(res => {
+      dispatch({
+        type: 'ADD_COMMENT_TO_FRIEND_SPOT',
+        payload: res
+      })
+    })
+  }
+}
+
 export const updateSpotType = (spotId, type) => {
   return (dispatch) => {
     adapter.places.updateSpotType(spotId, type)
@@ -75,6 +107,13 @@ export const updateSpotType = (spotId, type) => {
         payload: res
       })
     })
+  }
+}
+
+export const showFriendSpot = (spot) => {
+  return {
+    type: 'UPDATE_ACTIVE_FRIEND_SPOT',
+    payload: spot
   }
 }
 

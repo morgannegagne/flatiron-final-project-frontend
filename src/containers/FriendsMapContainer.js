@@ -17,14 +17,24 @@ class FriendsMapContainer extends React.Component{
     }
   }
 
+  getSpots(){
+    let spots = [];
+    if (this.props.selectedFriends.length){
+      this.props.selectedFriends.forEach(friend => {
+        friend.spots.forEach(spot => spots.push({...spot, username: friend.username}))
+      });
+    } else {
+      this.props.allFriends.forEach(friend => {
+        friend.spots.forEach(spot => spots.push({...spot, username: friend.username}))
+      });
+    }
+    return spots
+  }
+
   render(){
-    let spots = []
-    this.props.spots.forEach(collection => {
-      collection.forEach(spot => spots.push(spot))
-    })
+    const spots = this.getSpots();
     return(
       <div className="mapItem">
-
           <Map
             className="mapItem"
             googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ33Uqce6yl_qY19v4fzrj4G4cmQHFkFs&v=3.exp&libraries=geometry,drawing,places'}
@@ -32,6 +42,7 @@ class FriendsMapContainer extends React.Component{
             containerElement={<div style={{ height: 600 }} />}
             mapElement={<div style={{ height: `100%` }} />}
             spots={spots}
+            friendMap={true}
             />
       </div>
     )
@@ -39,7 +50,8 @@ class FriendsMapContainer extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  spots: state.friends.selectedFriends.map(friend => friend.spots),
+  selectedFriends: state.friends.selectedFriends,
+  allFriends: state.friends.acceptedFriends,
   currentUser: state.auth.currentUser,
 })
 

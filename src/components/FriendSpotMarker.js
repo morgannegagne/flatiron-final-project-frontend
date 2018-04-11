@@ -4,23 +4,15 @@ import { Marker, InfoWindow } from 'react-google-maps'
 import InfoWindowCard from './InfoWindowCard'
 import Heart from '../images/heart.png'
 import Star from '../images/star.png'
-import { updateActiveMarker } from '../actions/map'
-class SpotMarker extends React.Component {
+import { showFriendSpot } from '../actions/places'
+
+class FriendSpotMarker extends React.Component {
 
   state = {
     hover: false,
     active: false
   }
 
-  componentWillReceiveProps(next){
-    if (next.activeSpot){
-      if (next.activeSpot.id === this.props.spot.id){
-        this.setState({active: true})
-      } else {
-        this.setState({active: false, hover: false})
-      }
-    }
-  }
 
   handleMouseOver = () => {
     this.setState({hover: true})
@@ -31,7 +23,7 @@ class SpotMarker extends React.Component {
   }
 
   handleClick = () => {
-    this.props.updateActiveMarker(this.props.spot)
+    this.props.showFriendSpot(this.props.spot)
   }
 
   getIcon = () =>{
@@ -53,7 +45,6 @@ class SpotMarker extends React.Component {
           onClick={this.handleClick}
           onMouseOver={this.handleMouseOver}
           onMouseOut={this.handleMouseOut}
-          icon={icon}
         >
         {
           this.state.hover && !this.state.active ?
@@ -72,4 +63,4 @@ const mapStateToProps = state => ({
   activeSpot: state.places.activeSpot
 })
 
-export default connect(mapStateToProps, {updateActiveMarker})(SpotMarker)
+export default connect(mapStateToProps, { showFriendSpot })(FriendSpotMarker)

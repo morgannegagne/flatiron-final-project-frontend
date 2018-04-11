@@ -2,10 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
 import SpotMarker from './SpotMarker'
+import FriendSpotMarker from './FriendSpotMarker'
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 const Map = withScriptjs(withGoogleMap( (props) => {
-  const markers = props.spots.map(spot => < SpotMarker spot={spot} key={`marker-${spot.id}`} />)
+  const markers = props.spots.map(spot => {
+    return props.friendMap ? < FriendSpotMarker spot={spot} key={`marker-${spot.id}`} />  : < SpotMarker spot={spot} key={`marker-${spot.id}`} />
+  })
   return(
     <GoogleMap
       defaultZoom={5}
