@@ -40,7 +40,7 @@ class SidePanelMenu extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  activeItem: state.map.activeMenu
+  activeItem: state.places.activeMenu
 })
 
 export default connect(mapStateToProps, { changeActiveMenu })(SidePanelMenu);

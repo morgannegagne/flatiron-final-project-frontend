@@ -46,6 +46,15 @@ const saveSpot = data => {
   .then(res => res.json())
 }
 
+const updateSpotType = (spotId, type) => {
+  return fetch(`${API_ROOT}/spots/${spotId}`, {
+    headers: headers,
+    method: 'PATCH',
+    body: JSON.stringify({spot_type: type})
+  })
+  .then(res => res.json())
+}
+
 const removeSpot = id => {
   return fetch(`${API_ROOT}/spots/${id}`, {
     headers: headers,
@@ -139,7 +148,8 @@ export const adapter = {
     saveSpot,
     removeSpot,
     fetchSpots,
-    addComment
+    addComment,
+    updateSpotType
   },
   friends: {
     fetchUsers,

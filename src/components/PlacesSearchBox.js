@@ -21,10 +21,6 @@ class PlacesSearchBox extends React.Component {
         })
       }
 
-
-    handlePlaceChange = () => {
-    }
-
     render(){
       return(
         <div>
@@ -41,7 +37,6 @@ class PlacesSearchBox extends React.Component {
 
         </div>
       )
-
     }
 
 }

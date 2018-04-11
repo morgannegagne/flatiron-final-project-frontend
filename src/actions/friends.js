@@ -65,3 +65,10 @@ export const declineFriendRequest = (friend) => {
     })
   }
 }
+
+export const updateSelectedFriends = (values) => {
+  return {
+    type: 'UPDATE_SELECTED_FRIENDS',
+    payload: values
+  }
+}

@@ -69,7 +69,7 @@ class SpotMarker extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  activeSpot: state.map.activeSpot
+  activeSpot: state.places.activeSpot
 })
 
 export default connect(mapStateToProps, {updateActiveMarker})(SpotMarker)

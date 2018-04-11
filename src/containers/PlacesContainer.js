@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
 import SpotList from '../components/SpotList'
-import SpotCard from '../components/SpotCard'
+import SpotPage from '../components/SpotPage'
 
 
 class PlacesContainer extends React.Component{
@@ -13,7 +13,7 @@ class PlacesContainer extends React.Component{
     return(
       <div>
         { activeSpot ?
-          < SpotCard key={activeSpot.id} {...activeSpot} />
+          < SpotPage key={activeSpot.id} {...activeSpot} />
         :
           < SpotList spots={this.props.spots}/>
         }
@@ -25,7 +25,7 @@ class PlacesContainer extends React.Component{
 const mapStateToProps = state => {
   return {
     spots: state.places.spots,
-    activeSpot: state.map.activeSpot
+    activeSpot: state.places.activeSpot
   }
 }
 

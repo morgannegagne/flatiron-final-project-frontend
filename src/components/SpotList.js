@@ -14,4 +14,8 @@ const SpotList = props => {
 
 };
 
-export default connect(null)(SpotList);
+const mapStateToProps = state => ({
+  spots: state.places.spots
+})
+
+export default connect(mapStateToProps)(SpotList);

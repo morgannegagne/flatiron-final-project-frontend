@@ -29,6 +29,6 @@ class SidePanelContainer extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  active: state.map.sidePanelActive
+  active: state.places.sidePanelActive
 })
 export default connect(mapStateToProps, { toggleSidePanel })(SidePanelContainer)

@@ -7,13 +7,14 @@ export function updatePlaces(places){
   }
 }
 
-export const saveSpot= (place, type) => {
+export const saveSpot = (place, type) => {
   return (dispatch) => {
     const data = {
       place: {
         google_uid: place.place_id,
         address: place.formatted_address,
         phone_number: place.formatted_phone_number,
+        website: place.website,
         name: place.name,
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
@@ -60,6 +61,17 @@ export const addComment = (spotId, text) => {
     .then(res => {
       dispatch({
         type: 'ADD_COMMENT',
+        payload: res
+      })
+    })
+  }
+}
+export const updateSpotType = (spotId, type) => {
+  return (dispatch) => {
+    adapter.places.updateSpotType(spotId, type)
+    .then(res => {
+      dispatch({
+        type: 'UPDATE_SPOT_TYPE',
         payload: res
       })
     })

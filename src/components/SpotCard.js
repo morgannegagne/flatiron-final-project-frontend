@@ -26,9 +26,10 @@ class SpotCard extends React.Component {
     const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
     return(
       <li>
-        <h3>{this.props.place.name}</h3>
+        <h4>{this.props.place.name}</h4>
         <p>{this.props.place.address}</p>
         <p>{this.props.place.phone_number}</p>
+        <p><a href={this.props.place.website} target="_blank">{this.props.place.website}</a></p>
         <h4>Comments</h4>
         {comments}
         <form onSubmit={this.handleSubmit}>

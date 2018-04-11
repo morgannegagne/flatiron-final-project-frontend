@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchSpots } from '../actions/places'
 import MapContainer from './MapContainer'
+import FriendsMapContainer from './FriendsMapContainer'
 import SidePanelContainer from './SidePanelContainer'
 import NavBar from '../components/NavBar'
 import withAuth from '../components/withAuth'
@@ -19,7 +20,12 @@ class LandingContainer extends React.Component{
         < NavBar />
         <div className="grid-container">
           < SidePanelContainer />
+        {
+          this.props.activeMenu === 'explore' ?
+          < FriendsMapContainer />
+        :
           < MapContainer />
+        }
         </div>
       </div>
     );
@@ -29,6 +35,7 @@ class LandingContainer extends React.Component{
 const mapStateToProps = state => {
   return {
     spots: state.places.spots,
+    activeMenu: state.places.activeMenu
   }
 }
 
