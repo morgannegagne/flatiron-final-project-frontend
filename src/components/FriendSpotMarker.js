@@ -32,13 +32,11 @@ class FriendSpotMarker extends React.Component {
     } else {
       return this.props.spot.spot_type === 'favorite' ? Heart : Star
     }
-
   }
 
   render(){
     const place = this.props.spot.place
     const location = {lat: place.lat, lng: place.lng}
-    const icon = this.getIcon()
     return(
         <Marker
           position={location}

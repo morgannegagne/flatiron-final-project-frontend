@@ -8,6 +8,7 @@ import BigHeartOutline from '../images/heart-outline.png'
 import BigStarOutline from '../images/big-star.png'
 import BigStar from '../images/big-star-filled.png'
 import BigHeart from '../images/big-heart.png'
+import PhotoCarousel from './PhotoCarousel'
 
 const options = {
   accept: 'image/*',
@@ -63,9 +64,14 @@ class SpotPage extends React.Component {
     const { apiKey } = this.props
     return(
       <div>
-        <img src={defaultImg} alt="default" width="400"/>
+        {
+          this.props.images.length ?
+          < PhotoCarousel images={this.props.images}/>
+        :
+          <img src={defaultImg} alt="default-img" width={`500px`}/>
+        }
         <ReactFilestack
-          apikey={"AHS4DFGVtQ562Oc1Hbl4Bz"}
+          apikey={apiKey}
           buttonText="upload a photo"
           options={options}
           onSuccess={this.handleUpload}

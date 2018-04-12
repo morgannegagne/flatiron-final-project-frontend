@@ -148,7 +148,7 @@ const addImage = (id, image)=> {
     method: 'POST',
     body: JSON.stringify({ image, id })
   })
-  .then(res => res.json()).then(console.log)
+  .then(res => res.json())
 }
 
 export const adapter = {
