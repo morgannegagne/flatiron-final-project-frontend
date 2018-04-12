@@ -3,7 +3,7 @@ import { Route, withRouter, Switch } from 'react-router-dom'
 import { connect } from "react-redux"
 import Signup from './Signup'
 import Login from './Login'
-import { getUser } from './actions/auth'
+import { getUser, fetchAPIkey } from './actions/auth'
 import { fetchSpots } from './actions/places'
 import { fetchUsers } from './actions/friends'
 import LandingContainer from './containers/LandingContainer'
@@ -17,6 +17,7 @@ class App extends Component {
     if (token && !this.props.currentUser){
       this.props.getUser(token, this.props.history)
     }
+    this.props.fetchAPIkey()
     this.props.fetchUsers()
   }
 
@@ -45,4 +46,4 @@ function mapStateToProps(state){
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getUser, fetchSpots, fetchUsers })(App));
+export default withRouter(connect(mapStateToProps, {getUser, fetchSpots, fetchUsers, fetchAPIkey })(App));

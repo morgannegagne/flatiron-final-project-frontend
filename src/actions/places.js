@@ -50,6 +50,12 @@ export const saveSpot = (place, spot_type) => {
   }
 }
 
+export const addImage = (spotId, images) => {
+  return(dispatch) => {
+    adapter.places.addImage(spotId, images)
+  }
+}
+
 export const fetchSpots = (id) => {
   return (dispatch) => {
     adapter.places.fetchSpots(id)

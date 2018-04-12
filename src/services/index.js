@@ -6,6 +6,10 @@ const headers = {
   Accepts: 'application/json'
 };
 
+const fetchAPIkey = () => {
+  return fetch(`${BASE_URL}/api_keys`).then(res => res.json())
+}
+
 const getWithToken = url => {
   const token = localStorage.getItem('token');
   return fetch(url, {
@@ -138,18 +142,29 @@ const fetchMapSpots = (userId) => {
   .then(res => res.json())
 }
 
+const addImage = (id, image)=> {
+  return fetch(`${API_ROOT}/images`,{
+    headers: headers,
+    method: 'POST',
+    body: JSON.stringify({ image, id })
+  })
+  .then(res => res.json()).then(console.log)
+}
+
 export const adapter = {
   auth: {
     login,
     getCurrentUser,
-    signup
+    signup,
+    fetchAPIkey
   },
   places: {
     saveSpot,
     removeSpot,
     fetchSpots,
     addComment,
-    updateSpotType
+    updateSpotType,
+    addImage
   },
   friends: {
     fetchUsers,

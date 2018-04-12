@@ -12,6 +12,15 @@ export const signUp = (username, password, history) => {
   }
 }
 
+export const fetchAPIkey = () => {
+  return (dispatch) => {
+    adapter.auth.fetchAPIkey()
+    .then(res => {
+      dispatch({type: 'SET_API_KEY', payload: res.key})
+    })
+  }
+}
+
 export function getUser(jwt, history){
   return function(dispatch){
     adapter.auth.getCurrentUser()

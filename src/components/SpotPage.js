@@ -1,12 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { removeSpot, addComment, updateSpotType } from '../actions/places'
+import ReactFilestack from 'filestack-react'
+import { removeSpot, addComment, updateSpotType, addImage } from '../actions/places'
 import defaultImg from '../images/default-img.gif'
 import { Icon } from 'semantic-ui-react'
 import BigHeartOutline from '../images/heart-outline.png'
 import BigStarOutline from '../images/big-star.png'
 import BigStar from '../images/big-star-filled.png'
 import BigHeart from '../images/big-heart.png'
+
+const options = {
+  accept: 'image/*',
+  maxFiles: 1,
+  transformations:{
+    crop:{
+      force:true,
+      aspectRatio:1
+    }
+  },
+  fromSources:["local_file_system","url","facebook","instagram","googledrive"]
+};
 
 class SpotPage extends React.Component {
 
@@ -41,11 +54,22 @@ class SpotPage extends React.Component {
     this.setState({showComments: !this.state.showComments})
   }
 
+  handleUpload = arg => {
+    this.props.addImage(this.props.id, arg.filesUploaded[0])
+  }
+
   render(){
     const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
+    const { apiKey } = this.props
     return(
       <div>
         <img src={defaultImg} alt="default" width="400"/>
+        <ReactFilestack
+          apikey={"AHS4DFGVtQ562Oc1Hbl4Bz"}
+          buttonText="upload a photo"
+          options={options}
+          onSuccess={this.handleUpload}
+          />
         <h3>{this.props.place.name}</h3>
         <div>
           {
@@ -91,4 +115,10 @@ class SpotPage extends React.Component {
 
 };
 
-export default connect(null, {removeSpot, addComment, updateSpotType})(SpotPage);
+const mapStateToProps = state => {
+  return {
+    apiKey: state.auth.apiKey
+  }
+}
+
+export default connect(mapStateToProps, {removeSpot, addComment, updateSpotType, addImage})(SpotPage);

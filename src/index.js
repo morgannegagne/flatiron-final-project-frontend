@@ -10,6 +10,8 @@ import placesReducer from './reducers/placesReducer'
 import friendsReducer from './reducers/friendsReducer'
 import thunk from 'redux-thunk'
 
+require('dotenv').config();
+
 const rootReducer = combineReducers({
   auth: authReducer,
   places: placesReducer,
