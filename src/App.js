@@ -6,9 +6,11 @@ import Login from './Login'
 import { getUser, fetchAPIkey } from './actions/auth'
 import { fetchSpots } from './actions/places'
 import { fetchUsers } from './actions/friends'
+import { fetchLists } from './actions/lists'
 import LandingContainer from './containers/LandingContainer'
 import FriendsContainer from './containers/FriendsContainer'
 import ProfilePageContainer from './containers/ProfilePageContainer'
+
 
 class App extends Component {
 
@@ -19,6 +21,7 @@ class App extends Component {
     }
     this.props.fetchAPIkey()
     this.props.fetchUsers()
+    this.props.fetchLists()
   }
 
   render() {
@@ -46,4 +49,4 @@ function mapStateToProps(state){
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getUser, fetchSpots, fetchUsers, fetchAPIkey })(App));
+export default withRouter(connect(mapStateToProps, {getUser, fetchSpots, fetchUsers, fetchAPIkey, fetchLists })(App));

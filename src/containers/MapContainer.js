@@ -18,6 +18,7 @@ class MapContainer extends React.Component{
   }
 
   render(){
+    const spots = this.props.activeMenu === 'lists' && this.props.activeList ? this.props.activeList.spots : this.props.spots
     return(
       <div className="mapItem">
         {
@@ -28,7 +29,7 @@ class MapContainer extends React.Component{
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: 600 }} />}
             mapElement={<div style={{ height: `100%` }} />}
-            spots={this.props.spots}
+            spots={spots}
             />
           :
           'loading'
@@ -41,6 +42,8 @@ class MapContainer extends React.Component{
 const mapStateToProps = state => ({
   spots: state.places.spots,
   currentUser: state.auth.currentUser,
+  activeMenu: state.places.activeMenu,
+  activeList: state.lists.activeList
 })
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
 import { removeSpot, addComment, updateSpotType, addImage } from '../actions/places'
+import { saveToList, removeFromList } from '../actions/lists'
 import defaultImg from '../images/default-img.gif'
 import { Icon } from 'semantic-ui-react'
 import BigHeartOutline from '../images/heart-outline.png'
@@ -62,6 +63,12 @@ class SpotPage extends React.Component {
   render(){
     const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
     const { apiKey } = this.props
+    const allLists = this.props.lists
+    const addListOptions = allLists.map(list => {
+      return list.spots.map(spot => spot.id).includes(this.props.spot.id) ?
+      (<div>{list.name} - <button onClick={() => this.props.removeFromList(this.props.spot, list)}>UNSAVE</button></div>) :
+      (<div>{list.name} <button onClick={() => this.props.saveToList(this.props.spot, list)}>SAVE</button></div>)
+    })
     return(
       <div>
         {
@@ -101,6 +108,8 @@ class SpotPage extends React.Component {
           <p><a href={this.props.place.website} target="_blank"><Icon name="globe"/>{this.props.place.website}</a></p>
           : null
         }
+        Lists
+        {addListOptions}
         {
           this.state.showComments ?
           <div>
@@ -123,8 +132,9 @@ class SpotPage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    apiKey: state.auth.apiKey
+    apiKey: state.auth.apiKey,
+    lists: state.lists.lists
   }
 }
 
-export default connect(mapStateToProps, {removeSpot, addComment, updateSpotType, addImage})(SpotPage);
+export default connect(mapStateToProps, {removeSpot, addComment, updateSpotType, addImage, saveToList, removeFromList})(SpotPage);

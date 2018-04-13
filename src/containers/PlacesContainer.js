@@ -13,7 +13,7 @@ class PlacesContainer extends React.Component{
     return(
       <div>
         { activeSpot ?
-          < SpotPage key={activeSpot.id} {...activeSpot} />
+          < SpotPage key={activeSpot.id} spot={activeSpot} {...activeSpot} />
         :
           < SpotList spots={this.props.spots}/>
         }

@@ -142,13 +142,39 @@ const fetchMapSpots = (userId) => {
   .then(res => res.json())
 }
 
-const addImage = (id, image)=> {
+const addImage = (id, image) => {
   return fetch(`${API_ROOT}/images`,{
     headers: headers,
     method: 'POST',
     body: JSON.stringify({ image, id })
   })
   .then(res => res.json())
+}
+
+const createList = (name) => {
+  return fetch(`${API_ROOT}/lists`, {
+    headers: {...headers,
+      Authorization: localStorage.getItem('token')
+    },
+    method: 'POST',
+    body: JSON.stringify({ name })
+  }).then(res => res.json())
+}
+
+const fetchLists = () => {
+  return fetch(`${API_ROOT}/lists`, {
+    headers: {
+      Authorization: localStorage.getItem('token')
+    }
+  }).then(res => res.json())
+}
+
+const updateList = (spot, list) => {
+  return fetch(`${API_ROOT}/lists/${list.id}`, {
+    headers: headers,
+    method: 'PATCH',
+    body: JSON.stringify({spot_id: spot.id})
+  }).then(res => res.json())
 }
 
 export const adapter = {
@@ -173,5 +199,10 @@ export const adapter = {
     acceptFriendRequest,
     declineFriendRequest,
     fetchMapSpots
+  },
+  lists: {
+    createList,
+    fetchLists,
+    updateList
   }
 };
