@@ -8,10 +8,6 @@ import { fetchSpots } from '../actions/places'
 
 class ProfilePageContainer extends React.Component {
 
-  state = {
-    loaded: false
-  }
-
   componentWillReceiveProps(next){
     if (next.user){
       this.props.fetchSpots(next.user.id)

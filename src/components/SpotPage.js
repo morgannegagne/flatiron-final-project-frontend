@@ -1,12 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { removeSpot, addComment, updateSpotType } from '../actions/places'
+import ReactFilestack from 'filestack-react'
+import { removeSpot, addComment, updateSpotType, addImage } from '../actions/places'
+import { saveToList, removeFromList } from '../actions/lists'
 import defaultImg from '../images/default-img.gif'
 import { Icon } from 'semantic-ui-react'
 import BigHeartOutline from '../images/heart-outline.png'
 import BigStarOutline from '../images/big-star.png'
 import BigStar from '../images/big-star-filled.png'
 import BigHeart from '../images/big-heart.png'
+import PhotoCarousel from './PhotoCarousel'
+
+const options = {
+  accept: 'image/*',
+  maxFiles: 1,
+  transformations:{
+    crop:{
+      force:true,
+      aspectRatio:1
+    }
+  },
+  fromSources:["local_file_system","url","facebook","instagram","googledrive"]
+};
 
 class SpotPage extends React.Component {
 
@@ -41,11 +56,33 @@ class SpotPage extends React.Component {
     this.setState({showComments: !this.state.showComments})
   }
 
+  handleUpload = arg => {
+    this.props.addImage(this.props.id, arg.filesUploaded[0])
+  }
+
   render(){
     const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
+    const { apiKey } = this.props
+    const allLists = this.props.lists
+    const addListOptions = allLists.map(list => {
+      return list.spots.map(spot => spot.id).includes(this.props.spot.id) ?
+      (<div>{list.name} - <button onClick={() => this.props.removeFromList(this.props.spot, list)}>UNSAVE</button></div>) :
+      (<div>{list.name} <button onClick={() => this.props.saveToList(this.props.spot, list)}>SAVE</button></div>)
+    })
     return(
       <div>
-        <img src={defaultImg} alt="default" width="400"/>
+        {
+          this.props.images.length ?
+          < PhotoCarousel images={this.props.images}/>
+        :
+          <img src={defaultImg} alt="default-img" width={`500px`}/>
+        }
+        <ReactFilestack
+          apikey={apiKey}
+          buttonText="upload a photo"
+          options={options}
+          onSuccess={this.handleUpload}
+          />
         <h3>{this.props.place.name}</h3>
         <div>
           {
@@ -71,6 +108,8 @@ class SpotPage extends React.Component {
           <p><a href={this.props.place.website} target="_blank"><Icon name="globe"/>{this.props.place.website}</a></p>
           : null
         }
+        Lists
+        {addListOptions}
         {
           this.state.showComments ?
           <div>
@@ -91,4 +130,11 @@ class SpotPage extends React.Component {
 
 };
 
-export default connect(null, {removeSpot, addComment, updateSpotType})(SpotPage);
+const mapStateToProps = state => {
+  return {
+    apiKey: state.auth.apiKey,
+    lists: state.lists.lists
+  }
+}
+
+export default connect(mapStateToProps, {removeSpot, addComment, updateSpotType, addImage, saveToList, removeFromList})(SpotPage);

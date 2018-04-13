@@ -59,6 +59,12 @@ export default function placesReducer(
           }
         })
       }
+
+    case 'ADD_PHOTO':
+      return {
+        ...state,
+        activeSpot: action.payload
+      }
     case 'CHANGE_ACTIVE_MARKER':
       return {...state, activeSpot: action.payload, activeMenu: 'spots', sidePanelActive: true}
     case 'CHANGE_ACTIVE_MENU':
