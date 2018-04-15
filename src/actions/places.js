@@ -23,6 +23,12 @@ export const saveFriendSpot = (place, spot_type, source) => {
       source
     }
     adapter.places.saveSpot(data)
+    .then(res => {
+      dispatch({
+        type: 'UPDATE_CURRENT_USER_SPOTS',
+        payload: res
+      })
+    })
   }
 }
 
@@ -54,7 +60,6 @@ export const addImage = (spotId, images) => {
   return(dispatch) => {
     adapter.places.addImage(spotId, images)
     .then(res => {
-      console.log(res)
       dispatch({
         type: 'ADD_PHOTO',
         payload: res
@@ -127,6 +132,12 @@ export const showFriendSpot = (spot) => {
   return {
     type: 'UPDATE_ACTIVE_FRIEND_SPOT',
     payload: spot
+  }
+}
+
+export const voidActiveMenu = () => {
+  return {
+    type: 'VOID_ACTIVE_MENU'
   }
 }
 

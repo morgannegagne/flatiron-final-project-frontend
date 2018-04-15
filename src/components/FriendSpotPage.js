@@ -6,7 +6,7 @@ import { Icon } from 'semantic-ui-react'
 import BigStar from '../images/big-star-filled.png'
 import BigHeart from '../images/big-heart.png'
 
-class SpotPage extends React.Component {
+class FriendSpotPage extends React.Component {
 
   state = {
     text: '',
@@ -35,6 +35,16 @@ class SpotPage extends React.Component {
     this.setState({showComments: !this.state.showComments})
   }
 
+  checkIfCurrentUserSaved = () => {
+    let response = false
+    this.props.currentUser.spots.forEach(spot => {
+      if (spot.place.google_uid === this.props.place.google_uid){
+        response = true
+      }
+    })
+    return response
+  }
+
   render(){
     const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
     return(
@@ -53,7 +63,12 @@ class SpotPage extends React.Component {
             </span>
           }
           {this.props.place.name}
-          <span><Icon link name="remove bookmark" onClick={this.handleUserSave}/>Save</span>
+          {
+            this.checkIfCurrentUserSaved() ?
+            null
+            :
+            <span><Icon link name="remove bookmark" onClick={this.handleUserSave}/>Save</span>
+          }
         </h3>
         </div>
         <p><Icon name="point"/>{this.props.place.address}</p>
@@ -83,4 +98,8 @@ class SpotPage extends React.Component {
 
 };
 
-export default connect(null, {removeSpot, addCommentToFriendSpot, saveFriendSpot})(SpotPage);
+const mapStateToProps = state => ({
+  currentUser: state.auth.currentUser
+})
+
+export default connect(mapStateToProps, {removeSpot, addCommentToFriendSpot, saveFriendSpot})(FriendSpotPage);

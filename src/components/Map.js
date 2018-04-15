@@ -6,8 +6,9 @@ import FriendSpotMarker from './FriendSpotMarker'
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 const Map = withScriptjs(withGoogleMap( (props) => {
+  console.log(props)
   const markers = props.spots.map(spot => {
-    return props.friendMap ? < FriendSpotMarker spot={spot} key={`marker-${spot.id}`} />  : < SpotMarker spot={spot} key={`marker-${spot.id}`} />
+    return props.currentUser.id !== spot.user_id ? < FriendSpotMarker spot={spot} key={`marker-${spot.id}`} />  : < SpotMarker spot={spot} key={`marker-${spot.id}`} />
   })
   return(
     <GoogleMap
@@ -25,4 +26,9 @@ const Map = withScriptjs(withGoogleMap( (props) => {
   )
 }))
 
-export default connect(null)(Map)
+const mapStateToProps = state => ({
+  currentUser: state.auth.currentUser
+})
+
+
+export default connect(mapStateToProps)(Map)

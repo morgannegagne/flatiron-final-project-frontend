@@ -4,6 +4,7 @@ import PlacesContainer from '../containers/PlacesContainer'
 import SearchContainer from '../containers/SearchContainer'
 import ExploreContainer from '../containers/ExploreContainer'
 import ListsContainer from '../containers/ListsContainer'
+import FriendSpotPage from './FriendSpotPage'
 
 
 class SidePanelItem extends React.Component {
@@ -18,6 +19,8 @@ class SidePanelItem extends React.Component {
         return < ExploreContainer />
       case 'lists':
         return < ListsContainer />
+      case 'friendSpot':
+        return < FriendSpotPage {...this.props.activeSpot}/>
       default:
         return null
     }
@@ -34,7 +37,8 @@ class SidePanelItem extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  activeItem: state.places.activeMenu
+  activeItem: state.places.activeMenu,
+  activeSpot: state.places.activeFriendSpot
 })
 
 export default connect(mapStateToProps)(SidePanelItem);

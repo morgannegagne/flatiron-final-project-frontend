@@ -65,6 +65,13 @@ export default function placesReducer(
         ...state,
         activeSpot: action.payload
       }
+    case 'VOID_ACTIVE_MENU':
+      return {
+        ...state,
+        activeSpot: null,
+        activeMenu: null,
+        sidePanelActive: false
+      }
     case 'CHANGE_ACTIVE_MARKER':
       return {...state, activeSpot: action.payload, activeMenu: 'spots', sidePanelActive: true, googlePlaces: []}
     case 'CHANGE_ACTIVE_MENU':
@@ -72,7 +79,7 @@ export default function placesReducer(
     case 'TOGGLE_SIDE_PANEL':
       return {...state, sidePanelActive: !state.sidePanelActive}
     case 'UPDATE_ACTIVE_FRIEND_SPOT':
-      return {...state, activeFriendSpot: action.payload}
+      return {...state, activeFriendSpot: action.payload, sidePanelActive: true, activeMenu: 'friendSpot'}
     default:
       return state
   }
