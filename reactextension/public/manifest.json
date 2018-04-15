@@ -1,10 +1,30 @@
 {
   "short_name": "React App",
   "name": "React Extension",
+  "description": "An extension to save spots to {final project website}",
+  "author": "Morganne Gagne",
   "manifest_version": 2,
+  "background": {
+    "scripts": ["app/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["pages/index.js"],
+      "run_at": "document_end",
+      "exclude_matches": ["https://www.youtube.com/*"]
+    }
+  ],
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "React Ext"
   },
-  "version": "1.0"
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "http://*/",
+    "https://*/"
+  ]
 }

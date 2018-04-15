@@ -1,6 +1,9 @@
 .grid-container {
   display: flex;
 }
+.flex-container {
+  display: flex;
+}
 
 .mapItem {
   flex-grow: 1;
@@ -8,4 +11,34 @@
 
 .ui.vertical.menu {
   width: auto;
+}
+
+.sign-up-form {
+  width: 500px;
+  margin: auto;
+  padding-top: 150px;
+  text-align: center;
+}
+
+.sign-up-form h1 {
+  text-align: center;
+}
+
+.user-image {
+  border-radius: 6px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+  margin: 5px;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+#background-video{
+  height: 100%;
+  width: 100%;
+  float: left;
+  top: 0;
+  padding: none;
+  position: fixed;
 }

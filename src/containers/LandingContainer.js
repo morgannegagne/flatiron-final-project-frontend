@@ -5,6 +5,7 @@ import MapContainer from './MapContainer'
 import FriendsMapContainer from './FriendsMapContainer'
 import SidePanelContainer from './SidePanelContainer'
 import NavBar from '../components/NavBar'
+import UserDiv from '../components/UserDiv'
 import withAuth from '../components/withAuth'
 import '../App.css'
 
@@ -18,6 +19,7 @@ class LandingContainer extends React.Component{
     return(
       <div>
         < NavBar />
+        < UserDiv user={this.props.currentUser}/>
         <div className="grid-container">
           < SidePanelContainer />
         {
