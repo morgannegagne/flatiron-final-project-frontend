@@ -4,32 +4,88 @@ import { connect } from 'react-redux'
 import withAuth from '../components/withAuth'
 import UserCard from '../components/UserCard'
 import RequestCard from '../components/RequestCard'
+import FriendCard from '../components/FriendCard'
 import PendingFriendRequestCard from '../components/PendingFriendRequestCard'
 import { fetchUsers } from '../actions/friends'
 import NavBar from '../components/NavBar'
 
 class FriendsContainer extends React.Component{
 
+  state = {
+    showPending: true
+  }
+
   componentDidMount(){
     this.props.fetchUsers()
+  }
+
+  toggleRequestMenu = () => {
+    this.setState({showPending: !this.state.showPending})
   }
 
   render(){
     const users = this.props.unfriended.map( u => <UserCard key={u.id} {...u}/>)
     const requests = this.props.requestedFriends.map( r => <RequestCard key={`request-${r.id}`} friend={r}/>)
     const pendingRequests = this.props.pendingFriends.map(f => < PendingFriendRequestCard key={`pending-${f.id}`} friend={f} />)
-    const acceptedFriends = this.props.acceptedFriends.map(f => <div key={`accepted-${f.id}`}><NavLink to={`profiles/${f.username}`}>{f.username}</NavLink></div>)
+    const acceptedFriends = this.props.acceptedFriends.map(f => <FriendCard key={`accepted-${f.id}`} {...f}/>)
     return(
       <div>
         < NavBar />
-        <h1>SENT REQUESTS</h1>
-        {requests}
-        <h1>PENDING REQUESTS</h1>
-        {pendingRequests}
-        <h1>YOUR FRIENDS</h1>
-        {acceptedFriends}
-        <h1>ADD FRIENDS</h1>
-        {users}
+        <NavLink to="/">Return to Map</NavLink>
+      {
+        this.state.showPending ?
+        <div className="request-box">
+          {
+            this.props.pendingFriends.length ?
+            <div>
+              <h4>Respond to Your Friend Requests</h4>
+              <a onClick={this.toggleRequestMenu}>View Sent Requests</a>
+              {pendingRequests}
+            </div>
+            :
+            <div>
+              <h4>No pending invitations.</h4>
+              <a onClick={this.toggleRequestMenu}>View Sent Requests</a>
+            </div>
+          }
+        </div>
+        :
+        <div className="request-box">
+          {
+            this.props.requestedFriends.length ?
+            <div>
+              <h4>Your Sent Requests</h4>
+              <a onClick={this.toggleRequestMenu}>Respond to Pending Friend Requests</a>
+              {requests}
+            </div>
+            :
+            <div>
+              <h4>No pending sent requests.</h4>
+              <a onClick={this.toggleRequestMenu}>Respond to Pending Friend Requests</a>
+            </div>
+          }
+        </div>
+      }
+
+      {
+        this.props.acceptedFriends.length ?
+        <div className="request-box">
+          <h4>Friends</h4>
+          <div className="user-card-container">
+            {acceptedFriends}
+          </div>
+        </div>
+        :
+        <div className="request-box">
+          You don't have any friends right now. Search below to get started!
+        </div>
+      }
+        <div className="request-box">
+          <h4>Add Friends</h4>
+          <div className="user-card-container">
+            {users}
+          </div>
+        </div>
       </div>
     )
   }

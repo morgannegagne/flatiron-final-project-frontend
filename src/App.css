@@ -1,9 +1,6 @@
 .grid-container {
   display: flex;
 }
-.flex-container {
-  display: flex;
-}
 
 .mapItem {
   flex-grow: 1;
@@ -26,9 +23,104 @@
 
 .user-image {
   border-radius: 6px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+  width: 50%;
   margin: 5px;
 }
+
+.map {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 6px;
+  padding: 3px;
+  margin: auto;
+}
+
+.user-div {
+  display: grid;
+  grid-template-columns: 30% 100px 100px 100px;
+}
+
+.user-item {
+  margin: auto;
+  grid-column-start: 1;
+  text-align: center;
+}
+
+.user-saves {
+  grid-column-start: 2;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.user-favorites {
+  grid-column-start: 3;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.user-friends {
+  grid-column-start: 4;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.side-panel-item {
+  width: 450px;
+}
+
+.option-image {
+  height: 100%;
+  padding: 2px;
+  grid-column-start: 2;
+  margin-right: 3px;
+}
+
+.option-description {
+  grid-column-start: 1;
+  padding-left: 10px;
+}
+
+.option-card {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  border-style-bottom: solid;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.request-box {
+  width: 80%;
+  margin: auto;
+  border: 1px solid lightgrey;
+  text-align: center;
+  padding-top: 5px;
+  margin-top: 20px;
+}
+
+.user-card {
+  border: 1px solid lightgrey;
+  height: auto;
+  width: 200px;
+  flex-basis: auto;
+  margin: 5px;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.user-card:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user-card-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
 
 html {
   font-family: 'Open Sans', sans-serif !important;

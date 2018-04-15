@@ -11,7 +11,7 @@ class PlacesContainer extends React.Component{
   render(){
     const { activeSpot } = this.props
     return(
-      <div>
+      <div className="side-panel-item">
         { activeSpot ?
           < SpotPage key={activeSpot.id} spot={activeSpot} {...activeSpot} />
         :

@@ -4,6 +4,7 @@ import { fetchSpots } from '../actions/places'
 import MapContainer from './MapContainer'
 import FriendsMapContainer from './FriendsMapContainer'
 import SidePanelContainer from './SidePanelContainer'
+import SidePanelItem from '../components/SidePanelItem'
 import NavBar from '../components/NavBar'
 import UserDiv from '../components/UserDiv'
 import withAuth from '../components/withAuth'
@@ -20,8 +21,9 @@ class LandingContainer extends React.Component{
       <div>
         < NavBar />
         < UserDiv user={this.props.currentUser}/>
+        < SidePanelContainer />
         <div className="grid-container">
-          < SidePanelContainer />
+          < SidePanelItem />
         {
           this.props.activeMenu === 'explore' ?
           < FriendsMapContainer />

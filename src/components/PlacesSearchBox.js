@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withScriptjs } from 'react-google-maps'
 import { updatePlaces } from '../actions/places'
+import { Input } from 'semantic-ui-react'
 const { StandaloneSearchBox } = require("react-google-maps/lib/components/places/StandaloneSearchBox");
 
 class PlacesSearchBox extends React.Component {
@@ -28,13 +29,13 @@ class PlacesSearchBox extends React.Component {
             onPlacesChanged={this.state.onPlacesChanged}
             ref={this.state.onSearchBoxMounted}
           >
-            <input
+            <Input
               type="text"
-              placeholder="Search for a new place..."
-              style={{width: `300px`}}
+              placeholder="Search Google Maps for Spots..."
+              fluid
+              style={{padding: 5}}
             />
           </StandaloneSearchBox>
-
         </div>
       )
     }

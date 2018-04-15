@@ -22,7 +22,7 @@ export default function placesReducer(
         googlePlaces: []
       }
     case 'SAVE_SPOT':
-      return {...state}
+      return {...state, googlePlaces: []}
     case 'DELETE_SPOT':
       return {...state, spots: [...state.spots].filter(spot => spot.id !== action.payload)}
     case 'LOAD_SPOTS':
@@ -66,7 +66,7 @@ export default function placesReducer(
         activeSpot: action.payload
       }
     case 'CHANGE_ACTIVE_MARKER':
-      return {...state, activeSpot: action.payload, activeMenu: 'spots', sidePanelActive: true}
+      return {...state, activeSpot: action.payload, activeMenu: 'spots', sidePanelActive: true, googlePlaces: []}
     case 'CHANGE_ACTIVE_MENU':
       return {...state, activeMenu: action.payload }
     case 'TOGGLE_SIDE_PANEL':

@@ -27,7 +27,7 @@ class ListsContainer extends React.Component{
     const lists = this.props.lists.map(list => <ListCard key={`list-${list.id}`} list={list} /> )
     const { activeList } = this.props
     return(
-      <div>
+      <div className="side-panel-item">
         {
           activeList ?
           <div>

@@ -9,7 +9,7 @@ class ExploreContainer extends React.Component{
     const { activeSpot } = this.props
 
     return(
-      <div>
+      <div className="side-panel-item">
         < FriendSearchBar />
       {
         activeSpot ?

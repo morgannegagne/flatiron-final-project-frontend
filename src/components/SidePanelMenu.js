@@ -2,13 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
 import { changeActiveMenu } from '../actions/map'
-import SidePanelItem from './SidePanelItem'
 
 class SidePanelMenu extends React.Component {
-
-  state ={
-    activeItem: null
-  }
 
   handleClick = (e, {name}) => {
     this.props.changeActiveMenu(name)
@@ -18,9 +13,9 @@ class SidePanelMenu extends React.Component {
     const { activeItem } = this.props
     return(
       <div>
-        <Menu vertical>
+        <Menu pointing secondary>
           <Menu.Item active={activeItem === 'add'} name="add" onClick={this.handleClick}>
-            Add
+            Save
           </Menu.Item>
           <Menu.Item active={activeItem === 'spots'} name="spots" onClick={this.handleClick}>
             Spots
@@ -32,7 +27,6 @@ class SidePanelMenu extends React.Component {
             Explore
           </Menu.Item>
         </Menu>
-        < SidePanelItem />
       </div>
 
     )
