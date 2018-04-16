@@ -6,14 +6,26 @@ import FriendSpotMarker from './FriendSpotMarker'
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 const Map = withScriptjs(withGoogleMap( (props) => {
-  console.log(props)
   const markers = props.spots.map(spot => {
     return props.currentUser.id !== spot.user_id ? < FriendSpotMarker spot={spot} key={`marker-${spot.id}`} />  : < SpotMarker spot={spot} key={`marker-${spot.id}`} />
   })
+
+  const dynamicZoom = () => {
+    return props.activeMarker ?
+      {center: {
+        lat: props.activeMarker.place.lat,
+        lng: props.activeMarker.place.lng
+      },
+        zoom: 12
+      }
+      :
+      {center: {  lat:  42.3601, lng: -71.0589  }, zoom: 5}
+  }
+  console.log(dynamicZoom)
   return(
     <GoogleMap
-      defaultZoom={5}
-      defaultCenter={ {  lat:  42.3601, lng: -71.0589  } }
+      zoom={dynamicZoom().zoom}
+      center={ dynamicZoom().center}
       >
       <MarkerClusterer
         averageCenter
@@ -27,7 +39,8 @@ const Map = withScriptjs(withGoogleMap( (props) => {
 }))
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  activeMarker: state.places.activeSpot
 })
 
 

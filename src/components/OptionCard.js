@@ -30,7 +30,6 @@ class OptionCard extends React.Component {
   }
 
   render(){
-    console.log(this.state)
     const { place } = this.props
     const saved = this.checkIfSaved()
     return(

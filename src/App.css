@@ -117,6 +117,28 @@
   flex-wrap: wrap;
 }
 
+.spot-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.spot-card {
+  border: 1px solid lightgrey;
+  height: auto;
+  width: 130px;
+  flex-basis: auto;
+  margin: 2px;
+  border-radius: 4px;
+  padding: 2px;
+  text-align: center;
+}
+
+.spot-card:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
 a:hover {
   cursor: pointer;
 }

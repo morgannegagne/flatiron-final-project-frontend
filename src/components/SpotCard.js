@@ -1,15 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { removeSpot, addComment } from '../actions/places'
+import { updateActiveMarker } from '../actions/map'
+import defaultImage from '../images/default-img.gif'
 
 class SpotCard extends React.Component {
 
   state = {
     text: ''
-  }
-
-  handleClick = () => {
-    this.props.removeSpot(this.props.id)
   }
 
   handleSubmit = (e) => {
@@ -22,25 +20,25 @@ class SpotCard extends React.Component {
     this.setState({text: e.target.value})
   }
 
+  handleClick = () => {
+    this.props.updateActiveMarker(this.props.spot)
+  }
+
+  getImage = () => {
+    return this.props.images.length ? this.props.images[0].url : defaultImage
+  }
+
   render(){
     const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
+    const image = this.getImage()
     return(
-      <li>
-        <h4>{this.props.place.name}</h4>
-        <p>{this.props.place.address}</p>
-        <p>{this.props.place.phone_number}</p>
-        <p><a href={this.props.place.website} target="_blank">{this.props.place.website}</a></p>
-        <h4>Comments</h4>
-        {comments}
-        <form onSubmit={this.handleSubmit}>
-          <input value={this.state.text} onChange={this.handleChange} type="text"/>
-          <input type="submit"/>
-        </form>
-        <button onClick={this.handleClick}>DELETE SPOT :(</button>
-      </li>
+      <div onClick={this.handleClick} className="spot-card">
+        <img src={image} width="100%"/>
+        <div style={{fontSize: "1.2em"}}>{this.props.place.name}</div>
+      </div>
     )
   }
 
 };
 
-export default connect(null, {removeSpot, addComment})(SpotCard);
+export default connect(null, {removeSpot, addComment, updateActiveMarker})(SpotCard);

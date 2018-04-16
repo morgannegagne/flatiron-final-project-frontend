@@ -44,7 +44,8 @@ export const saveSpot = (place, spot_type) => {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       },
-      spot_type
+      spot_type,
+      photo: place.photos[0].getUrl({maxWidth: 300, maxHeight: 300})
   }
     adapter.places.saveSpot(data)
     .then(res => {

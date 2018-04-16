@@ -4,11 +4,13 @@ import SpotCard from './SpotCard'
 
 const SpotList = props => {
   const { spots } = props
-  const spotCards = spots.map(spot => <SpotCard key={spot.id} {...spot}/>)
+  const spotCards = spots.map(spot => <SpotCard key={spot.id} spot={spot} {...spot}/>)
   return(
     <div>
-      <h1>SPOTS</h1>
-      {spotCards}
+      <h1>Spots</h1>
+      <div className="spot-container">
+        {spotCards}
+      </div>
     </div>
   )
 
