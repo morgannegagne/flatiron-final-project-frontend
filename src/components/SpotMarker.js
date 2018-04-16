@@ -44,6 +44,7 @@ class SpotMarker extends React.Component {
   }
 
   render(){
+    console.log(this.props)
     const place = this.props.spot.place
     const location = {lat: place.lat, lng: place.lng}
     const icon = this.getIcon()

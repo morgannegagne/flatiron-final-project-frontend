@@ -5,9 +5,13 @@ import SidePanelItem from '../components/SidePanelItem'
 import UserDiv from '../components/UserDiv'
 import withAuth from '../components/withAuth'
 import NavBar from '../components/NavBar'
-import { fetchSpots } from '../actions/places'
+import { fetchSpots, voidActiveMenu } from '../actions/places'
 
 class ProfilePageContainer extends React.Component {
+
+  componentDidMount(){
+    this.props.voidActiveMenu()
+  }
 
   componentWillReceiveProps(next){
     if (next.user){
@@ -36,4 +40,4 @@ class ProfilePageContainer extends React.Component {
   }
 }
 
-export default connect(null, { fetchSpots })(withAuth(ProfilePageContainer))
+export default connect(null, { fetchSpots, voidActiveMenu })(withAuth(ProfilePageContainer))

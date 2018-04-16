@@ -72,6 +72,11 @@ export default function placesReducer(
         activeMenu: null,
         sidePanelActive: false
       }
+    case 'VOID_ACTIVE_SPOT':
+      return {
+        ...state,
+        activeSpot: null,
+      }
     case 'CHANGE_ACTIVE_MARKER':
       return {...state, activeSpot: action.payload, activeMenu: 'spots', sidePanelActive: true, googlePlaces: []}
     case 'CHANGE_ACTIVE_MENU':

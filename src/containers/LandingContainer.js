@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchSpots, voidActiveMenu } from '../actions/places'
+import { fetchLists } from '../actions/lists'
 import MapContainer from './MapContainer'
 import FriendsMapContainer from './FriendsMapContainer'
 import SidePanelContainer from './SidePanelContainer'
@@ -14,6 +15,7 @@ class LandingContainer extends React.Component{
 
   componentDidMount(){
     this.props.fetchSpots(this.props.currentUser.id);
+    this.props.fetchLists()
     this.props.voidActiveMenu()
   }
 
@@ -44,4 +46,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetchSpots, voidActiveMenu })(withAuth(LandingContainer));
+export default connect(mapStateToProps, { fetchSpots, voidActiveMenu, fetchLists })(withAuth(LandingContainer));

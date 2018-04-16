@@ -25,7 +25,7 @@ class MapContainer extends React.Component{
           this.state.loaded ?
           <Map
             className="mapItem"
-            googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ33Uqce6yl_qY19v4fzrj4G4cmQHFkFs&v=3.exp&libraries=geometry,drawing,places'}
+            googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Cl1Qf21cnhWLGQxYb3Cx8MGBANcogWg&v=3.exp&libraries=geometry,drawing,places'}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: 600 }} />}
             mapElement={<div style={{ height: `100%` }} />}

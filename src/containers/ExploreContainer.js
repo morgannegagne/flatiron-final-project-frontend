@@ -1,9 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { voidActiveSpot } from '../actions/places'
 import FriendSearchBar from '../components/FriendSearchBar'
 import FriendSpotPage from '../components/FriendSpotPage'
 
 class ExploreContainer extends React.Component{
+
+  componentDidMount(){
+    this.props.voidActiveSpot()
+  }
 
   render(){
     const { activeSpot } = this.props
@@ -26,4 +31,4 @@ const mapStateToProps = state => ({
   activeSpot: state.places.activeFriendSpot
 })
 
-export default connect(mapStateToProps)(ExploreContainer);
+export default connect(mapStateToProps, { voidActiveSpot })(ExploreContainer);

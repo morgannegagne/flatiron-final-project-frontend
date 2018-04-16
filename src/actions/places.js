@@ -72,6 +72,7 @@ export const fetchSpots = (id) => {
   return (dispatch) => {
     adapter.places.fetchSpots(id)
     .then(res => {
+      console.log(res)
       dispatch({
         type: 'LOAD_SPOTS',
         payload: res
@@ -138,6 +139,12 @@ export const showFriendSpot = (spot) => {
 export const voidActiveMenu = () => {
   return {
     type: 'VOID_ACTIVE_MENU'
+  }
+}
+
+export const voidActiveSpot = () => {
+  return {
+    type: 'VOID_ACTIVE_SPOT'
   }
 }
 

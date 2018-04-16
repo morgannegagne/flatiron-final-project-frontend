@@ -24,6 +24,7 @@ class ListsContainer extends React.Component{
   }
 
   render(){
+    console.log(this.props)
     const lists = this.props.lists.map(list => <ListCard key={`list-${list.id}`} list={list} /> )
     const { activeList } = this.props
     return(

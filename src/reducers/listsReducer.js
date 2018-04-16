@@ -8,7 +8,7 @@ export default function listsReducer(
 ){
   switch (action.type) {
     case 'LOAD_LISTS':
-      return {...state, lists: action.payload}
+      return {...state, lists: action.payload, activeListSpots: null}
     case 'ADD_LIST':
       return {...state, lists: [...state.lists, action.payload]}
     case 'TOGGLE_ACTIVE_LIST':
@@ -22,6 +22,11 @@ export default function listsReducer(
         lists: [...state.lists].map(list => {
           return list.id === action.payload.id ? action.payload : list
         })
+      }
+    case 'VOID_ACTIVE_MENU':
+      return {
+        ...state,
+        activeList: null
       }
     default:
       return state

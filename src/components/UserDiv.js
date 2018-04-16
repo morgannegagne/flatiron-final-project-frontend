@@ -5,7 +5,6 @@ import defaultUserImage from '../images/default-user-image.png'
 class UserDiv extends React.Component {
 
   render(){
-
     const { user } = this.props
     const favorites = this.props.user.spots.filter(spot => spot.spot_type === 'favorite')
     const saves = this.props.user.spots.filter(spot => spot.spot_type === 'save')
