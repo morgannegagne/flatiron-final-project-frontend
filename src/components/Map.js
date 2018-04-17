@@ -21,7 +21,6 @@ const Map = withScriptjs(withGoogleMap( (props) => {
       :
       {center: {  lat:  42.3601, lng: -71.0589  }, zoom: 5}
   }
-  console.log(dynamicZoom)
   return(
     <GoogleMap
       zoom={dynamicZoom().zoom}

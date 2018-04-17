@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { getUser } from '../actions/auth';
 import { fetchUsers } from '../actions/friends'
+import { fetchNotifications } from '../actions/notifications'
 
 
 const withAuth = WrappedComponent => {
@@ -16,6 +17,7 @@ const withAuth = WrappedComponent => {
       if (token) {
         this.props.getUser(token, this.props.history);
         this.props.fetchUsers()
+        this.props.fetchNotifications()
       } else {
         this.setState({ authCompleted: true });
       }
@@ -46,7 +48,7 @@ const withAuth = WrappedComponent => {
     allUsers: state.friends.allUsers
   });
 
-  return connect(mapStateToProps, { getUser, fetchUsers })(AuthedComponent);
+  return connect(mapStateToProps, { getUser, fetchUsers, fetchNotifications })(AuthedComponent);
 };
 
 export default withAuth;

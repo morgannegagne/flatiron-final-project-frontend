@@ -9,6 +9,7 @@ import authReducer from './reducers/authReducer'
 import placesReducer from './reducers/placesReducer'
 import friendsReducer from './reducers/friendsReducer'
 import listsReducer from './reducers/listsReducer'
+import notificationsReducer from './reducers/notificationsReducer'
 import thunk from 'redux-thunk'
 
 require('dotenv').config();
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   places: placesReducer,
   friends: friendsReducer,
-  lists: listsReducer
+  lists: listsReducer,
+  notifications: notificationsReducer
 })
 const store = createStore(rootReducer, applyMiddleware(thunk))
 

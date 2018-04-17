@@ -30,7 +30,19 @@ class Signup extends React.Component {
     }
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps)
+    if (nextProps.errors){
+      let message = ''
+      for (let key in nextProps.errors){
+        message = message + `${key[0].toUpperCase() + key.slice(1)} ${nextProps.errors[key]} \n`
+      }
+      alert(message)
+    }
+  }
+
   render(){
+    console.log(this.props.errors)
     return(
       <div>
         <NavBar />
@@ -54,6 +66,7 @@ class Signup extends React.Component {
             </Form.Field>
             <Button style={{width: "100%"}} type='submit'>Sign Up</Button>
           </Form>
+
           <NavLink to="/login">Already have an account? Login here</NavLink>
         </div>
       </div>
@@ -61,4 +74,8 @@ class Signup extends React.Component {
   }
 }
 
-export default connect(null, { signUp })(Signup)
+const mapStateToProps = state => ({
+  errors: state.auth.signUpErrors
+})
+
+export default connect(mapStateToProps, { signUp })(Signup)

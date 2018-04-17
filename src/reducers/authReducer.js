@@ -2,7 +2,8 @@ export default function authReducer(
   state = {
     currentUser: null,
     allUsers: [],
-    apiKey: null
+    apiKey: null,
+    signUpErrors: null
   },
   action
 ){
@@ -14,13 +15,22 @@ export default function authReducer(
     case 'SET_API_KEY':
       return {...state, apiKey: action.payload}
     case 'UPDATE_CURRENT_USER_SPOTS':
-      console.log('updating')
       return {
         ...state,
         currentUser: {
           ...state.currentUser,
           spots: [...state.currentUser.spots, action.payload]
         }
+      }
+    case 'UPDATE_CURRENT_USER_PHOTO':
+      return {
+        ...state,
+        currentUser: action.payload
+      }
+    case 'UPDATE_SIGNUP_ERRORS':
+      return {
+        ...state,
+        signUpErrors: action.payload
       }
     default:
       return state

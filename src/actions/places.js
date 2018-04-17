@@ -73,7 +73,6 @@ export const fetchSpots = (id) => {
   return (dispatch) => {
     adapter.places.fetchSpots(id)
     .then(res => {
-      console.log(res)
       dispatch({
         type: 'LOAD_SPOTS',
         payload: res

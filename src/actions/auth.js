@@ -5,10 +5,14 @@ export const signUp = (username, password, history) => {
     const data = { user: {username, password} }
     adapter.auth.signup(data)
     .then(res => {
-      localStorage.setItem('token', res.token)
-      dispatch({ type: 'GET_USER', payload: res.user})
+      if (res.error){
+        dispatch({type: 'UPDATE_SIGNUP_ERRORS', payload: res.error})
+      } else {
+        localStorage.setItem('token', res.token)
+        dispatch({ type: 'GET_USER', payload: res.user})
+        history.push('/')
+      }
     })
-    .then(() => {history.push('/')})
   }
 }
 
@@ -51,5 +55,17 @@ export function logout(history){
   history.push('/login')
   return {
     type: 'LOGOUT'
+  }
+}
+
+export function uploadProfilePhoto(image, userId){
+  return function(dispatch){
+    adapter.user.addProfilePhoto(image, userId)
+    .then(res => {
+      dispatch({
+        type: 'UPDATE_CURRENT_USER_PHOTO',
+        payload: res
+      })
+    })
   }
 }

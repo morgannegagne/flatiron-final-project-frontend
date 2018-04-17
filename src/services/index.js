@@ -177,12 +177,37 @@ const updateList = (spot, list) => {
   }).then(res => res.json())
 }
 
+const fetchNotifications = () => {
+  return fetch(`${API_ROOT}/notifications`, {
+    headers: { Authorization: localStorage.getItem('token') }
+  }).then( res => res.json())
+}
+
+const updateNotification = (id) => {
+  return fetch(`${API_ROOT}/notifications/${id}`, {
+    headers: headers,
+    method: 'PATCH',
+    body: JSON.stringify({unread: false})
+  }).then( res => res.json())
+}
+
+const addProfilePhoto = (image, userId) => {
+  return fetch(`${API_ROOT}/users/${userId}`, {
+    headers: headers,
+    method: 'PATCH',
+    body: JSON.stringify({user: {image_url: image}})
+  }).then(res => res.json())
+}
+
 export const adapter = {
   auth: {
     login,
     getCurrentUser,
     signup,
     fetchAPIkey
+  },
+  user: {
+    addProfilePhoto
   },
   places: {
     saveSpot,
@@ -204,5 +229,9 @@ export const adapter = {
     createList,
     fetchLists,
     updateList
+  },
+  notifications: {
+    fetchNotifications,
+    updateNotification
   }
 };
