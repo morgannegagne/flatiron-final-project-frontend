@@ -24,7 +24,7 @@ export default function placesReducer(
     case 'SAVE_SPOT':
       return {...state, googlePlaces: []}
     case 'DELETE_SPOT':
-      return {...state, spots: [...state.spots].filter(spot => spot.id !== action.payload)}
+      return {...state, spots: [...state.spots].filter(spot => spot.id !== action.payload), activeSpot: null}
     case 'LOAD_SPOTS':
       return {...state, spots: action.payload}
     case 'ADD_COMMENT':

@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Marker, InfoWindow } from 'react-google-maps'
 import InfoWindowCard from './InfoWindowCard'
-import Heart from '../images/heart.png'
-import Star from '../images/star.png'
+import HeartMarker from '../images/heart-marker.png'
+import StarMarker from '../images/star-marker.png'
 import { showFriendSpot } from '../actions/places'
 
 class FriendSpotMarker extends React.Component {
@@ -30,7 +30,7 @@ class FriendSpotMarker extends React.Component {
     if (this.state.active){
       return null
     } else {
-      return this.props.spot.spot_type === 'favorite' ? Heart : Star
+      return this.props.spot.spot_type === 'favorite' ? HeartMarker : StarMarker
     }
   }
 

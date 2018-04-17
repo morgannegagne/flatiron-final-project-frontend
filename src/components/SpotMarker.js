@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Marker, InfoWindow } from 'react-google-maps'
 import InfoWindowCard from './InfoWindowCard'
-import Heart from '../images/heart.png'
-import Star from '../images/star.png'
+import Heart from '../images/heart-marker.png'
+import Star from '../images/star-marker.png'
 import { updateActiveMarker } from '../actions/map'
+
+
 class SpotMarker extends React.Component {
 
   state = {

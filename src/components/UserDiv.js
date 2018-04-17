@@ -31,7 +31,7 @@ class UserDiv extends React.Component {
     return(
       <div className="user-div">
         <div className="user-item">
-          <h2>{user.username}</h2>
+          <h2>{user.name || user.username}</h2>
           <img src={user.image_url || defaultUserImage} className="user-image" alt="default-user-image"/>
           {
             user.id === this.props.currentUser.id ?

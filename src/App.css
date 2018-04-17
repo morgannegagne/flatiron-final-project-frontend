@@ -143,6 +143,68 @@ a:hover {
   cursor: pointer;
 }
 
+.spot-page-header {
+  padding: 10px;
+  margin-top: 3px;
+  border-bottom: 1px solid grey;
+  margin: 5px;
+}
+
+.page-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.page-icon:hover {
+  cursor: pointer;
+}
+
+.spot-page-subheader {
+  display: flex;
+  justify-content: space-around;
+}
+
+.spot-page-subheader-item {
+  flex-basis: auto;
+}
+
+.spot-page-comments-header {
+  border-bottom: 1px solid grey;
+  padding: 10px;
+}
+
+.spot-page-comments {
+  margin: 30px;
+}
+
+.comment-card {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin-bottom: 5px;
+}
+
+.comment-card-image {
+  grid-column-start: 1;
+  width: 60px;
+  border-radius: 4px;
+}
+
+.comment-card-text {
+  grid-column-start: 2;
+}
+
+.spot-page-lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px;
+}
+
+.spot-page-list {
+  flex-basis: auto;
+}
+
+
 
 html {
   font-family: 'Open Sans', sans-serif !important;

@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
 import { removeSpot, addComment, updateSpotType, addImage } from '../actions/places'
 import { saveToList, removeFromList } from '../actions/lists'
+import { voidActiveSpot } from '../actions/places'
 import defaultImg from '../images/default-img.gif'
-import { Icon } from 'semantic-ui-react'
+import { Form, Icon, Button, List, TextArea } from 'semantic-ui-react'
 import BigHeartOutline from '../images/heart-outline.png'
-import BigStarOutline from '../images/big-star.png'
-import BigStar from '../images/big-star-filled.png'
+import BigStarOutline from '../images/big-star-outline.png'
+import BigStar from '../images/big-star.png'
 import BigHeart from '../images/big-heart.png'
 import PhotoCarousel from './PhotoCarousel'
+import CommentCard from './CommentCard'
+import ListOptionCard from './ListOptionCard'
 
 const options = {
   accept: 'image/*',
@@ -27,7 +30,6 @@ class SpotPage extends React.Component {
 
   state = {
     text: '',
-    showComments: false
   }
 
   handleClick = () => {
@@ -61,69 +63,98 @@ class SpotPage extends React.Component {
   }
 
   render(){
-    const comments = this.props.comments.map(c => <div key={c.id}>{c.text}</div>)
+    const comments = this.props.comments.map(c => <CommentCard key={c.id} {...c}/>)
     const { apiKey } = this.props
     const allLists = this.props.lists
-    const addListOptions = allLists.map(list => {
-      return list.spots.map(spot => spot.id).includes(this.props.spot.id) ?
-      (<div>{list.name} - <button onClick={() => this.props.removeFromList(this.props.spot, list)}>UNSAVE</button></div>) :
-      (<div>{list.name} <button onClick={() => this.props.saveToList(this.props.spot, list)}>SAVE</button></div>)
-    })
+    const addListOptions = allLists.map(list => <ListOptionCard key={`list-option-${list.id}`} list={list} spot={this.props.spot} />)
     return(
       <div>
+        <a onClick={this.props.voidActiveSpot}>Back to list</a>
         {
           this.props.images.length ?
           < PhotoCarousel images={this.props.images}/>
         :
-          <img src={defaultImg} alt="default-img" width={`500px`}/>
+          <img src={defaultImg} alt="default-img" width={`100%`}/>
         }
         <ReactFilestack
           apikey={apiKey}
-          buttonText="upload a photo"
+          buttonText="Upload a photo"
+          buttonClass="ui tiny button fluid"
           options={options}
           onSuccess={this.handleUpload}
           />
-        <h3>{this.props.place.name}</h3>
-        <div>
+        <div className="spot-page-header">
+          <h3>{this.props.place.name}</h3>
           {
             this.props.spot_type === 'favorite' ?
-            <div>
-              <img src={BigHeart} alt="big-heart" width={20}/>
-              <img width={20} alt="big-star-outline" onClick={this.handleIconClick} src={BigStarOutline} />
-              <span onClick={this.toggleComments}>Comments</span>
+            <div className="spot-page-subheader">
+              <img className="spot-page-subheader-item page-icon" src={BigHeart} alt="big-heart" />
+              <img className="spot-page-subheader-item page-icon" alt="big-star-outline" onClick={this.handleIconClick} src={BigStarOutline} />
+              <Button className="spot-page-subheader-item" onClick={this.handleClick}>Remove</Button>
             </div>
             :
-            <div>
-              <img src={BigHeartOutline} alt="big-heart-outline" onClick={this.handleIconClick} width={20}/>
-              <img alt="big-star"width={20} src={BigStar} />
-              <span onClick={this.toggleComments}>Comments</span>
+            <div className="spot-page-subheader">
+              <img src={BigHeartOutline} className="spot-page-subheader-item page-icon" alt="big-heart-outline" onClick={this.handleIconClick} />
+              <img className="spot-page-subheader-item page-icon" alt="big-star" src={BigStar} />
+              <Button className="spot-page-subheader-item" onClick={this.handleClick}>Remove</Button>
             </div>
           }
-
         </div>
-        <p><Icon name="point"/>{this.props.place.address}</p>
-        <p><Icon name="phone"/>{this.props.place.phone_number}</p>
-        {
-          this.props.place.website ?
-          <p><a href={this.props.place.website} target="_blank"><Icon name="globe"/>{this.props.place.website}</a></p>
-          : null
-        }
-        Lists
-        {addListOptions}
-        {
-          this.state.showComments ?
-          <div>
-            <h4>Comments</h4>
-            {comments}
-            <form onSubmit={this.handleSubmit}>
-              <input value={this.state.text} onChange={this.handleChange} type="text"/>
-              <input type="submit"/>
-            </form>
-            <button onClick={this.handleClick}>DELETE SPOT :(</button>
-          </div>
-          :
-          null
-        }
+        <div style={{paddingLeft: 30, paddingTop: 30}}>
+          <List relaxed>
+            <List.Item>
+              <List.Icon name="point" size="large" verticalAlign="middle" />
+              <List.Content>
+                {this.props.place.address}
+              </List.Content>
+            </List.Item>
+            {
+              this.props.place.phone_number ?
+              <List.Item>
+                <List.Icon name="phone" size="large" verticalAlign="middle" />
+                <List.Content>
+                  {this.props.phone_number}
+                </List.Content>
+              </List.Item>
+              : null
+            }
+            {
+              this.props.place.website ?
+              <List.Item>
+                <List.Icon name="globe" size="large" verticalAlign="middle" />
+                <List.Content>
+                  <a className="info-grid-text" href={this.props.place.website} target="_blank">{this.props.place.website}</a>
+                </List.Content>
+              </List.Item>
+              : null
+            }
+          </List>
+        </div>
+
+        <div className="spot-page-comments-header">
+          <h3>Lists</h3>
+        </div>
+        <div className="spot-page-lists">
+          {addListOptions}
+        </div>
+
+        <div className="spot-page-comments-header">
+          <h3 >Comments</h3>
+        </div>
+        <div className="spot-page-comments">
+          { comments.length ?
+            <div>
+              {comments}
+            </div>
+            :
+            <h5 style={{textAlign: "center"}}>No one has said anything yet...</h5>
+          }
+          <Form onSubmit={this.handleSubmit}>
+            <TextArea  autoHeight value={this.state.text} placeholder={`Say something about ${this.props.place.name}...`} onChange={this.handleChange}/> <br></br>
+            <Button onClick={this.handleSubmit} fluid type="submit">Comment</Button>
+          </Form>
+        </div>
+
       </div>
     )
   }
@@ -137,4 +168,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {removeSpot, addComment, updateSpotType, addImage, saveToList, removeFromList})(SpotPage);
+export default connect(mapStateToProps, {removeSpot, addComment, updateSpotType, addImage, saveToList, removeFromList, voidActiveSpot })(SpotPage);
