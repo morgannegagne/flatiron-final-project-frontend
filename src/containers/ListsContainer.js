@@ -2,11 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createList, showAllLists } from '../actions/lists'
 import ListCard from '../components/ListCard'
+import SpotCard from '../components/SpotCard'
+import { Button, Popup, Form, Input } from 'semantic-ui-react'
 
 class ListsContainer extends React.Component{
 
-  state ={
-    name: ''
+  state = {
+    name: '',
+    open: false
   }
 
   handleChange = (e) => {
@@ -16,15 +19,23 @@ class ListsContainer extends React.Component{
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.createList(this.state.name)
-    this.setState({name: ''})
+    this.setState({name: '', open: false})
   }
 
   handleShowAllLists = () => {
     this.props.showAllLists()
   }
 
+  handleOpen = () => {
+    this.setState({open: true})
+  }
+
+  handleClose = () => {
+    this.setState({open: false})
+  }
+
   render(){
-    console.log(this.props)
+
     const lists = this.props.lists.map(list => <ListCard key={`list-${list.id}`} list={list} /> )
     const { activeList } = this.props
     return(
@@ -32,17 +43,33 @@ class ListsContainer extends React.Component{
         {
           activeList ?
           <div>
-            <button onClick={this.handleShowAllLists}>Back to all Lists</button>
-            <h3>{activeList.name}</h3>
-            {activeList.spots.map(spot => <div>{spot.place.name}</div>)}
+            <a onClick={this.handleShowAllLists}>Back to all Lists</a>
+            <div className="side-panel-subheader">
+              <h3>{activeList.name}</h3>
+            </div>
+            <div className="spot-container">
+              {activeList.spots.map(spot => <SpotCard spot={spot} {...spot}/>)}
+            </div>
           </div>
           :
           <div>
-            ADD LIST
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" value={this.state.name} onChange={this.handleChange} placeholder="Name..." />
-              <input type="submit"/>
-            </form>
+          <div style={{width: "90%", margin: "auto"}}>
+            <Popup
+              trigger={<Button fluid>New List</Button>}
+              content={
+                <Form onSubmit={this.handleSubmit}>
+                  <Input type="text" value={this.state.name} onChange={this.handleChange} placeholder="Name..."/>
+                  <Button onClick={this.handleSubmit}>Create New List</Button>
+                </Form>
+              }
+              open={this.state.open}
+              onOpen={this.handleOpen}
+              onClose={this.handleClose}
+              on="click"
+              basic
+              />
+
+          </div>
             {lists}
           </div>
         }

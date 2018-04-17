@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { toggleActiveList } from '../actions/lists'
+import { Card } from 'semantic-ui-react'
 
 class ListCard extends React.Component {
 
@@ -11,9 +12,14 @@ class ListCard extends React.Component {
   render(){
     const { list } = this.props
     return(
-      <div onClick={this.handleClick}>
-        {list.name}
-      </div>
+      <Card fluid color="blue" onClick={this.handleClick}>
+        <Card.Header>
+          <h4 style={{padding: 5}}>{list.name}</h4>
+        </Card.Header>
+        <Card.Content>
+          {list.spots.length} spots
+        </Card.Content>
+      </Card>
     )
   }
 };

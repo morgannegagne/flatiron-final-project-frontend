@@ -204,6 +204,18 @@ a:hover {
   flex-basis: auto;
 }
 
+.ui.blue.fluid.card {
+  padding: 1em;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: auto;
+}
+
+.side-panel-subheader {
+  border-bottom: 1px solid grey;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
 
 html {
