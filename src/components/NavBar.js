@@ -2,9 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Popup } from 'semantic-ui-react'
+import { Menu, Dropdown, Popup, Icon } from 'semantic-ui-react'
 import { logout } from '../actions/auth'
 import NotificationCard from './NotificationCard'
+import Sheep from '../images/sheep-logo.png'
 
 class NavBar extends React.Component {
 
@@ -12,38 +13,33 @@ class NavBar extends React.Component {
     this.props.logout(this.props.history);
   }
 
+  showFriendsMenu = () => {
+    this.props.history.push('/friends');
+  }
+
+  showMap = () => {
+    this.props.history.push('/');
+  }
+
   render(){
     const notifications = this.props.notifications.map(n => <NotificationCard key={`notification-${n.id}`} notification={n} />)
     return(
-      <Menu attached="top">
+      <Menu attached="top" borderless>
         <Menu.Item>
-          cool website
+          <img src={Sheep} width={30} style={{marginRight: 10}} />
+          <div style={{fontSize: "1.5em"}}>herd.</div>
         </Menu.Item>
         {
           this.props.currentUser ?
           <Menu.Menu position="right">
             <Menu.Item>
-              <Popup
-                trigger={<div>{this.props.notifications.length}</div>}
-                content={notifications}
-                on="click"
-                position="bottom right"
-                />
+              <Icon link name="globe" size="large" onClick={this.showMap}/>
             </Menu.Item>
             <Menu.Item>
-              <Dropdown icon='large user circle' simple>
-                <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <NavLink to='/'>Map</NavLink>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <NavLink to="/friends">Friends</NavLink>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <NavLink to="#" onClick={this.handleClick}>Logout</NavLink>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Icon link onClick={this.showFriendsMenu} size="large" name="users"></Icon>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="#" onClick={this.handleClick}>Logout</NavLink>
             </Menu.Item>
           </Menu.Menu>
           :

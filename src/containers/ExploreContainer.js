@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { voidActiveSpot } from '../actions/places'
+import { voidActiveSpot, voidActiveFriendSpot } from '../actions/places'
 import FriendSearchBar from '../components/FriendSearchBar'
 import FriendSpotPage from '../components/FriendSpotPage'
 
@@ -8,6 +8,7 @@ class ExploreContainer extends React.Component{
 
   componentDidMount(){
     this.props.voidActiveSpot()
+    this.props.voidActiveFriendSpot()
   }
 
   render(){
@@ -15,7 +16,10 @@ class ExploreContainer extends React.Component{
 
     return(
       <div className="side-panel-item">
-        < FriendSearchBar />
+        <div className="side-panel-subheader">
+          <h3>Explore</h3>
+        </div>
+        < FriendSearchBar style={{paddingTop: 10}}/>
       {
         activeSpot ?
         < FriendSpotPage {...activeSpot} />
@@ -31,4 +35,4 @@ const mapStateToProps = state => ({
   activeSpot: state.places.activeFriendSpot
 })
 
-export default connect(mapStateToProps, { voidActiveSpot })(ExploreContainer);
+export default connect(mapStateToProps, { voidActiveSpot, voidActiveFriendSpot })(ExploreContainer);

@@ -26,7 +26,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <Switch>
           <Route exact path="/" render={(routerProps) =>  < LandingContainer history={routerProps.history} />} />
           <Route path="/signup" render={(routerProps) => < Signup history={routerProps.history}/>} />

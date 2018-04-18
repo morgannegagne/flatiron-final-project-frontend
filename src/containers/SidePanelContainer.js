@@ -7,8 +7,10 @@ class SidePanelContainer extends React.Component{
 
   render(){
     return(
-      <div className="sidePanelItem">
-        <SidePanelMenu />
+      <div class="ui centered grid">
+        <div class="center aligned column">
+          <SidePanelMenu />
+        </div>
       </div>
     )
   }

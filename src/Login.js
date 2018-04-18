@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Grid } from 'semantic-ui-react'
 import { logIn } from './actions/auth'
 import NavBar from './components/NavBar'
+import Sheep from './images/sheep-logo.png'
 
 class Login extends React.Component {
 
@@ -36,18 +37,27 @@ class Login extends React.Component {
 
       <div>
         <NavBar />
-        <div className="sign-up-form">
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Field>
-              <input type="text" onChange={this.handleChange} value={this.state.username} placeholder="username" name="username"/>
-            </Form.Field>
-            <Form.Field>
-              <input type="password" onChange={this.handleChange} value={this.state.password} placeholder="password" name="password"/>
-            </Form.Field>
-            <Button style={{width: "100%"}} type='submit'>Login</Button>
-          </Form>
-          <NavLink to="/signup">Don't have an account? Sign up here!</NavLink>
-        </div>
+          <Grid centered style={{marginTop: 100}}>
+          <Grid.Row>
+            <Grid.Column width={4} textAlign="right" verticalAlign="bottom">
+              <img src={Sheep} style={{paddingBottom: 25}}/>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <div className="sign-up-form">
+                <Form onSubmit={this.handleSubmit} style={{marginBottom: 10}}>
+                  <Form.Field>
+                    <input type="text" onChange={this.handleChange} value={this.state.username} placeholder="username" name="username"/>
+                  </Form.Field>
+                  <Form.Field>
+                    <input type="password" onChange={this.handleChange} value={this.state.password} placeholder="password" name="password"/>
+                  </Form.Field>
+                  <Button style={{width: "100%"}} type='submit'>Login</Button>
+                </Form>
+                <NavLink to="/signup" className="navlink">Don't have an account? Sign up here!</NavLink>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Button } from 'semantic-ui-react'
 import { cancelFriendRequest } from '../actions/friends'
 
 const RequestCard = props => {
@@ -12,7 +13,7 @@ const RequestCard = props => {
   return(
     <div>
       You sent a request to {friend.username}
-      <button onClick={handleClick}>CANCEL REQUEST BYE HONEY</button>
+      <Button size="mini" color="red" onClick={handleClick}>Cancel</Button>
     </div>
 
   )

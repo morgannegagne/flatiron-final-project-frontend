@@ -29,7 +29,7 @@ const Map = withScriptjs(withGoogleMap( (props) => {
         zoom: 12
       }
       :
-      {center: {  lat:  42.3601, lng: -71.0589  }, zoom: 5}
+      {center: {  lat:  8.495752, lng: -16.842289  }, zoom: 2.2}
   }
   return(
     <GoogleMap

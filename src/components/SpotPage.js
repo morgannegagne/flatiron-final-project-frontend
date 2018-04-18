@@ -154,7 +154,6 @@ class SpotPage extends React.Component {
             <Button onClick={this.handleSubmit} fluid type="submit">Comment</Button>
           </Form>
         </div>
-
       </div>
     )
   }

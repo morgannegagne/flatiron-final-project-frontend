@@ -34,26 +34,26 @@ class FriendsContainer extends React.Component{
         <NavLink to="/">Return to Map</NavLink>
       {
         this.state.showPending ?
-        <div className="request-box">
+        <div className="request-box white-background-div">
           {
             this.props.pendingFriends.length ?
             <div>
               <h4>Respond to Your Friend Requests</h4>
-              <a onClick={this.toggleRequestMenu}>View Sent Requests</a>
+              <a onClick={this.toggleRequestMenu}>View Sent Requests ({this.props.requestedFriends.length})</a>
               {pendingRequests}
             </div>
             :
             <div>
               <h4>No pending invitations.</h4>
-              <a onClick={this.toggleRequestMenu}>View Sent Requests</a>
+              <a onClick={this.toggleRequestMenu}>View Sent Requests ({this.props.requestedFriends.length})</a>
             </div>
           }
         </div>
         :
-        <div className="request-box">
+        <div className="request-box white-background-div">
           {
             this.props.requestedFriends.length ?
-            <div>
+            <div >
               <h4>Your Sent Requests</h4>
               <a onClick={this.toggleRequestMenu}>Respond to Pending Friend Requests</a>
               {requests}
@@ -69,18 +69,18 @@ class FriendsContainer extends React.Component{
 
       {
         this.props.acceptedFriends.length ?
-        <div className="request-box">
+        <div className="request-box white-background-div">
           <h4>Friends</h4>
           <div className="user-card-container">
             {acceptedFriends}
           </div>
         </div>
         :
-        <div className="request-box">
+        <div className="request-box white-background-div">
           You don't have any friends right now. Search below to get started!
         </div>
       }
-        <div className="request-box">
+        <div className="request-box white-background-div">
           <h4>Add Friends</h4>
           <div className="user-card-container">
             {users}

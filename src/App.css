@@ -1,3 +1,23 @@
+.App {
+  background-image: url('./images/background-cement.jpg');
+  background-size: cover;
+  background: rgb(240, 240, 240);
+  min-height: 800px;
+  font-family: 'Karla', sans-serif;
+  margin: 1px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Karla', sans-serif !important;
+}
+
+div {
+  font-family: 'Karla', sans-serif !important;
+}
+
+body {
+  font-family: 'Karla', sans-serif !important;
+}
 .grid-container {
   display: flex;
 }
@@ -12,19 +32,44 @@
 
 .sign-up-form {
   width: 500px;
-  margin: auto;
-  padding-top: 150px;
+  padding-top: 80px;
   text-align: center;
 }
 
 .sign-up-form h1 {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 .user-image {
   border-radius: 6px;
   width: 50%;
   margin: 5px;
+}
+
+.navlink {
+  font-size: 1.2em;
+  color: grey;
+}
+
+.navlink:hover {
+  font-weight:bold;
+  cursor: pointer;
+}
+
+.notifications {
+  height: 200px;
+  width: 500px;
+  background-color: white;
+  margin: auto;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.notifications-content {
+  overflow: scroll;
+  background-color: white;
 }
 
 .map {
@@ -36,7 +81,7 @@
 
 .user-div {
   display: grid;
-  grid-template-columns: 30% 100px 100px 100px;
+  grid-template-columns: 25% 100px 100px 100px 1fr;
 }
 
 .user-item {
@@ -49,6 +94,14 @@
   grid-column-start: 2;
   text-align: center;
   padding-top: 80px;
+}
+
+.ui.tiny.button {
+  border: 2px solid;
+}
+
+.ui.borderless.top.attached.menu {
+  border: 4px solid black
 }
 
 .user-favorites {
@@ -65,6 +118,8 @@
 
 .side-panel-item {
   width: 450px;
+  height: 800px;
+  overflow: scroll;
 }
 
 .option-image {
@@ -125,6 +180,8 @@
 
 .spot-card {
   border: 1px solid lightgrey;
+  background-color: white;
+  margin: auto;
   height: auto;
   width: 130px;
   flex-basis: auto;
@@ -191,6 +248,10 @@ a:hover {
 
 .comment-card-text {
   grid-column-start: 2;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  padding: 3px;
 }
 
 .spot-page-lists {
@@ -204,6 +265,16 @@ a:hover {
   flex-basis: auto;
 }
 
+.ui.secondary.pointing.menu .item.padded {
+  margin-left: 25px;
+  margin-right: 25px;
+  font-size: 1.2em;
+}
+
+.ui.secondary.pointing.menu {
+  margin-bottom: 20px;
+}
+
 .ui.blue.fluid.card {
   padding: 1em;
   margin-left: 20px;
@@ -212,14 +283,25 @@ a:hover {
 }
 
 .side-panel-subheader {
-  border-bottom: 1px solid grey;
   padding: 10px;
+  border: 4px solid black;
   margin-bottom: 10px;
+  background-color: white;
 }
 
+.ui.button {
+  border: 2px solid;
+}
 
-html {
-  font-family: 'Open Sans', sans-serif !important;
+.ui.teal.button {
+  border: 2px solid rgb(88, 88, 89);
+}
+
+.white-background-div {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 3px;
+  padding-bottom: 5px;
 }
 
 #background-video{

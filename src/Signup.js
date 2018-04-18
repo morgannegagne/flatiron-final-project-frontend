@@ -2,8 +2,9 @@ import React from 'react'
 import { signUp } from './actions/auth'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Grid } from 'semantic-ui-react'
 import NavBar from './components/NavBar'
+import Sheep from './images/sheep-logo.png'
 
 class Signup extends React.Component {
 
@@ -31,7 +32,6 @@ class Signup extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps)
     if (nextProps.errors){
       let message = ''
       for (let key in nextProps.errors){
@@ -42,33 +42,42 @@ class Signup extends React.Component {
   }
 
   render(){
-    console.log(this.props.errors)
     return(
       <div>
         <NavBar />
-        <div className="sign-up-form">
-          <h1>Sign Up</h1>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Field>
-              <input type="text" onChange={this.handleChange} value={this.state.name} placeholder="Name" name="name"/>
-            </Form.Field>
-            <Form.Field>
-              <input type="text" onChange={this.handleChange} value={this.state.username} placeholder="Username" name="username"/>
-            </Form.Field>
-            <Form.Field>
-              <input type="text" onChange={this.handleChange} value={this.state.email} placeholder="Email" name="email"/>
-            </Form.Field>
-            <Form.Field>
-              <input type="password" onChange={this.handleChange} value={this.state.password} placeholder="Password" name="password"/>
-            </Form.Field>
-            <Form.Field>
-              <input type="password" onChange={this.handleChange} value={this.state.passwordConfirmation} placeholder="Confirm password" name="passwordConfirmation"/>
-            </Form.Field>
-            <Button style={{width: "100%"}} type='submit'>Sign Up</Button>
-          </Form>
+        <Grid centered>
+          <Grid.Row>
+            <Grid.Column width={4} textAlign="right" verticalAlign="bottom">
+              <img src={Sheep} style={{paddingBottom: 25}}/>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <div className="sign-up-form">
+                <h1>Have you Herd? Sign up Now!</h1>
+                <Form onSubmit={this.handleSubmit} style={{marginBottom: 10}}>
+                  <Form.Field>
+                    <input type="text" onChange={this.handleChange} value={this.state.name} placeholder="Name" name="name"/>
+                  </Form.Field>
+                  <Form.Field>
+                    <input type="text" onChange={this.handleChange} value={this.state.username} placeholder="Username" name="username"/>
+                  </Form.Field>
+                  <Form.Field>
+                    <input type="text" onChange={this.handleChange} value={this.state.email} placeholder="Email" name="email"/>
+                  </Form.Field>
+                  <Form.Field>
+                    <input type="password" onChange={this.handleChange} value={this.state.password} placeholder="Password" name="password"/>
+                  </Form.Field>
+                  <Form.Field>
+                    <input type="password" onChange={this.handleChange} value={this.state.passwordConfirmation} placeholder="Confirm password" name="passwordConfirmation"/>
+                  </Form.Field>
+                  <Button style={{width: "100%"}} type='submit'>Sign Up</Button>
+                </Form>
+                <NavLink className="navlink" to="/login">Already have an account? Login here</NavLink>
+              </div>
 
-          <NavLink to="/login">Already have an account? Login here</NavLink>
-        </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+
       </div>
     )
   }

@@ -4,7 +4,8 @@ import { Marker, InfoWindow } from 'react-google-maps'
 import InfoWindowCard from './InfoWindowCard'
 import HeartMarker from '../images/heart-marker.png'
 import StarMarker from '../images/star-marker.png'
-import { showFriendSpot } from '../actions/places'
+import { showFriendSpot, showExploreSpot } from '../actions/places'
+import FriendMarker from '../images/friend-marker.png'
 
 class FriendSpotMarker extends React.Component {
 
@@ -23,26 +24,32 @@ class FriendSpotMarker extends React.Component {
   }
 
   handleClick = () => {
-    this.props.showFriendSpot(this.props.spot)
+    if (this.props.activeMenu === "explore"){
+      this.props.showExploreSpot(this.props.spot)
+    } else{
+      this.props.showFriendSpot(this.props.spot)
+    }
   }
 
   getIcon = () =>{
     if (this.state.active){
       return null
     } else {
-      return this.props.spot.spot_type === 'favorite' ? HeartMarker : StarMarker
+      return FriendMarker
     }
   }
 
   render(){
     const place = this.props.spot.place
     const location = {lat: place.lat, lng: place.lng}
+    const icon = this.getIcon()
     return(
         <Marker
           position={location}
           onClick={this.handleClick}
           onMouseOver={this.handleMouseOver}
           onMouseOut={this.handleMouseOut}
+          icon={icon}
         >
         {
           this.state.hover && !this.state.active ?
@@ -58,7 +65,8 @@ class FriendSpotMarker extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  activeSpot: state.places.activeSpot
+  activeSpot: state.places.activeSpot,
+  activeMenu: state.places.activeMenu
 })
 
-export default connect(mapStateToProps, { showFriendSpot })(FriendSpotMarker)
+export default connect(mapStateToProps, { showFriendSpot, showExploreSpot })(FriendSpotMarker)

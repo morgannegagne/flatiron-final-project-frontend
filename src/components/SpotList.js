@@ -7,7 +7,9 @@ const SpotList = props => {
   const spotCards = spots.map(spot => <SpotCard key={spot.id} spot={spot} {...spot}/>)
   return(
     <div>
-      <h1>Spots</h1>
+      <div className="side-panel-subheader">
+        <h3>Spots</h3>
+      </div>
       <div className="spot-container">
         {spotCards}
       </div>

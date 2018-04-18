@@ -43,10 +43,10 @@ class ListsContainer extends React.Component{
         {
           activeList ?
           <div>
-            <a onClick={this.handleShowAllLists}>Back to all Lists</a>
             <div className="side-panel-subheader">
               <h3>{activeList.name}</h3>
             </div>
+            <a onClick={this.handleShowAllLists}>Back to all Lists</a>
             <div className="spot-container">
               {activeList.spots.map(spot => <SpotCard spot={spot} {...spot}/>)}
             </div>

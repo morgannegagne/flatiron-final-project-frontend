@@ -12,23 +12,20 @@ class SidePanelMenu extends React.Component {
   render(){
     const { activeItem } = this.props
     return(
-      <div>
-        <Menu pointing secondary>
-          <Menu.Item active={activeItem === 'add'} name="add" onClick={this.handleClick}>
-            Save
-          </Menu.Item>
-          <Menu.Item active={activeItem === 'spots'} name="spots" onClick={this.handleClick}>
-            Spots
-          </Menu.Item>
-          <Menu.Item active={activeItem === 'lists'} name="lists" onClick={this.handleClick}>
-            Lists
-          </Menu.Item>
-          <Menu.Item active={activeItem === 'explore'} name="explore" onClick={this.handleClick}>
-            Explore
-          </Menu.Item>
-        </Menu>
-      </div>
-
+      <Menu pointing secondary compact>
+        <Menu.Item className="padded" active={activeItem === 'add'} name="add" onClick={this.handleClick}>
+          Save
+        </Menu.Item>
+        <Menu.Item className="padded" active={activeItem === 'spots'} name="spots" onClick={this.handleClick}>
+          Spots
+        </Menu.Item>
+        <Menu.Item className="padded" active={activeItem === 'lists'} name="lists" onClick={this.handleClick}>
+          Lists
+        </Menu.Item>
+        <Menu.Item className="padded" active={activeItem === 'explore'} name="explore" onClick={this.handleClick}>
+          Explore
+        </Menu.Item>
+      </Menu>
     )
   }
 };

@@ -136,6 +136,13 @@ export const showFriendSpot = (spot) => {
   }
 }
 
+export const showExploreSpot = (spot) => {
+  return {
+    type: 'UPDATE_ACTIVE_EXPLORE_SPOT',
+    payload: spot
+  }
+}
+
 export const voidActiveMenu = () => {
   return {
     type: 'VOID_ACTIVE_MENU'
@@ -145,6 +152,12 @@ export const voidActiveMenu = () => {
 export const voidActiveSpot = () => {
   return {
     type: 'VOID_ACTIVE_SPOT'
+  }
+}
+
+export const voidActiveFriendSpot = () => {
+  return {
+    type: 'VOID_ACTIVE_FRIEND_SPOT'
   }
 }
 

@@ -36,10 +36,9 @@ class FriendsMapContainer extends React.Component{
     return(
       <div className="mapItem">
           <Map
-            className="mapItem"
             googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Cl1Qf21cnhWLGQxYb3Cx8MGBANcogWg&v=3.exp&libraries=geometry,drawing,places'}
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: 600 }} />}
+            containerElement={<div style={{ height: 800 }} />}
             mapElement={<div style={{ height: `100%` }} />}
             spots={spots}
             friendMap={true}
