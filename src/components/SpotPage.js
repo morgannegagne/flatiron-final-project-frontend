@@ -128,6 +128,20 @@ class SpotPage extends React.Component {
               </List.Item>
               : null
             }
+            {
+              this.props.source ?
+              <List.Item>
+                <List.Icon style={{fontFamily: "'Karla', sans-serif",
+              fontWeight: "bold"}}>
+                  Source:
+                </List.Icon>
+                <List.Content>
+                  {this.props.source}
+                </List.Content>
+              </List.Item>
+              :
+              null
+            }
           </List>
         </div>
 

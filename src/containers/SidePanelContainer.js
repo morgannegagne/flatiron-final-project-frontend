@@ -7,7 +7,7 @@ class SidePanelContainer extends React.Component{
 
   render(){
     return(
-      <div class="ui centered grid">
+      <div class="ui centered grid" style={{bottonMargin: 20}}>
         <div class="center aligned column">
           <SidePanelMenu />
         </div>
