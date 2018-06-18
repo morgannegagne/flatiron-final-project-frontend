@@ -5,12 +5,14 @@ import SidePanelItem from '../components/SidePanelItem'
 import UserDiv from '../components/UserDiv'
 import withAuth from '../components/withAuth'
 import NavBar from '../components/NavBar'
-import { fetchSpots, voidActiveMenu } from '../actions/places'
+import { fetchSpots, voidActiveMenu, voidActiveFriendSpot } from '../actions/places'
 
 class ProfilePageContainer extends React.Component {
 
   componentDidMount(){
+    console.log('voiding active friend spot')
     this.props.voidActiveMenu()
+    this.props.voidActiveFriendSpot()
   }
 
   componentWillReceiveProps(next){
@@ -40,4 +42,4 @@ class ProfilePageContainer extends React.Component {
   }
 }
 
-export default connect(null, { fetchSpots, voidActiveMenu })(withAuth(ProfilePageContainer))
+export default connect(null, { fetchSpots, voidActiveMenu, voidActiveFriendSpot })(withAuth(ProfilePageContainer))

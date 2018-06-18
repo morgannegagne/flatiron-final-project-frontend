@@ -15,7 +15,6 @@ class MapContainer extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('receiving props')
     if (nextProps.spots){
       this.setState({
         loaded: true,
@@ -24,7 +23,7 @@ class MapContainer extends React.Component{
   }
 
   render(){
-    console.log('spots', this.props.spots, 'loaded', this.state.loaded)
+    console.log('active spot', this.props.activeSpot)
     const spots = this.props.activeMenu === 'lists' && this.props.activeList ? this.props.activeList.spots : this.props.spots
     return(
       <div className="mapItem">
@@ -38,7 +37,7 @@ class MapContainer extends React.Component{
             spots={spots}
             />
           :
-          'loading STUCK'
+          'loading...'
         }
       </div>
     )
@@ -49,7 +48,8 @@ const mapStateToProps = state => ({
   spots: state.places.spots,
   currentUser: state.auth.currentUser,
   activeMenu: state.places.activeMenu,
-  activeList: state.lists.activeList
+  activeList: state.lists.activeList,
+  activeSpot: state.places.activeFriendSpot
 })
 
 

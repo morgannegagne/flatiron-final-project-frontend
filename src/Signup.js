@@ -27,7 +27,7 @@ class Signup extends React.Component {
     if (this.state.password !== this.state.passwordConfirmation){
       alert(`Passwords don't match, try again`)
     } else{
-      this.props.signUp(this.state.username, this.state.password, this.props.history)
+      this.props.signUp(this.state.name, this.state.username, this.state.email, this.state.password, this.props.history)
     }
   }
 

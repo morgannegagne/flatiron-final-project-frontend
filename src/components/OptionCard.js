@@ -7,6 +7,7 @@ import BigHeartOutline from '../images/heart-outline.png'
 import BigStarOutline from '../images/big-star.png'
 import BigStar from '../images/big-star-filled.png'
 import BigHeart from '../images/big-heart.png'
+import defaultImage from '../images/default-img.gif'
 
 class OptionCard extends React.Component {
 
@@ -50,7 +51,12 @@ class OptionCard extends React.Component {
             </Button.Group>
           }
         </div>
-        <img alt="google" src={place.photos[0].getUrl({maxWidth: 100, maxHeight: 100})} className="option-image" />
+        {
+          place.photos ?
+            <img alt="google" src={place.photos[0].getUrl({maxWidth: 100, maxHeight: 100})} className="option-image" />
+          :
+            <img alt="default" src={defaultImage} height={100} className="option-image" />
+        }
 
       </div>
     )

@@ -1,8 +1,8 @@
 import { adapter } from '../services/index'
 
-export const signUp = (username, password, history) => {
+export const signUp = (name, username, email, password, history) => {
   return (dispatch) => {
-    const data = { user: {username, password} }
+    const data = { user: {name, username, email, password} }
     adapter.auth.signup(data)
     .then(res => {
       if (res.error){

@@ -37,7 +37,6 @@ class UserDiv extends React.Component {
     const favorites = this.props.user.spots.filter(spot => spot.spot_type === 'favorite')
     const saves = this.props.user.spots.filter(spot => spot.spot_type === 'save')
     const notifications = this.props.notifications.map(n => <NotificationCard notification={n}/>)
-    console.log(notifications)
     return(
       <div className="user-div">
         <div className="user-item">
@@ -100,4 +99,4 @@ const mapStateToProps = state => ({
   notifications: state.notifications.notifications
 })
 
-export default connect(mapStateToProps, { uploadProfilePhoto })(UserDiv);
+export default connect(mapStateToProps, { uploadProfilePhoto })(withAuth(UserDiv));

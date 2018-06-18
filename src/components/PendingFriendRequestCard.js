@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { acceptFriendRequest, declineFriendRequest } from '../actions/friends'
+import { Button } from 'semantic-ui-react'
 
 const RequestCard = props => {
   const { friend } = props
@@ -15,9 +16,9 @@ const RequestCard = props => {
 
   return(
     <div>
-      {friend.username} friended you
-      <button value="accept" onClick={handleClick}>Accept</button>
-      <button value="decline" onClick={handleClick}>Decline</button>
+      <span style={{paddingRight: 20}}>{friend.username} friended you</span>
+      <Button size="mini" positive value="accept" onClick={handleClick}>Accept</Button>
+      <Button size="mini" negative value="decline" onClick={handleClick}>Decline</Button>
     </div>
 
   )

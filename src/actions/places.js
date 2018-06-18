@@ -34,6 +34,8 @@ export const saveFriendSpot = (place, spot_type, source) => {
 
 export const saveSpot = (place, spot_type) => {
   return (dispatch) => {
+
+    let photo = place.photos ? place.photos[0].getUrl({maxWidth: 300, maxHeight: 300}) : null
     const data = {
       place: {
         google_uid: place.place_id,
@@ -45,7 +47,7 @@ export const saveSpot = (place, spot_type) => {
         lng: place.geometry.location.lng()
       },
       spot_type,
-      photo: place.photos[0].getUrl({maxWidth: 300, maxHeight: 300})
+      photo
   }
     adapter.places.saveSpot(data)
     .then(res => {

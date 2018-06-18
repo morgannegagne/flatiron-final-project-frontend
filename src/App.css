@@ -2,7 +2,7 @@
   background-image: url('./images/background-cement.jpg');
   background-size: cover;
   background: rgb(240, 240, 240);
-  min-height: 800px;
+  min-height: 1000px;
   font-family: 'Karla', sans-serif;
   margin: 1px;
 }
@@ -70,6 +70,7 @@ body {
 .notifications-content {
   overflow: scroll;
   background-color: white;
+  height: 100%;
 }
 
 .map {
@@ -124,6 +125,7 @@ body {
 
 .option-image {
   height: 100%;
+  width: 100%;
   padding: 2px;
   grid-column-start: 2;
   margin-right: 3px;
@@ -176,6 +178,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .spot-card {

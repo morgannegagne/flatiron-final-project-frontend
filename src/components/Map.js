@@ -21,16 +21,33 @@ const Map = withScriptjs(withGoogleMap( (props) => {
   ]
 
   const dynamicZoom = () => {
-    return props.activeMarker ?
-      {center: {
-        lat: props.activeMarker.place.lat,
-        lng: props.activeMarker.place.lng
-      },
-        zoom: 12
+    if (props.activeMarker){
+      return {
+        center: {
+          lat: props.activeMarker.place.lat,
+          lng: props.activeMarker.place.lng
+        },
+          zoom: 12
       }
-      :
-      {center: {  lat:  8.495752, lng: -16.842289  }, zoom: 2.2}
+    } else if (props.activeFriendMarker){
+      return {
+        center: {
+          lat: props.activeFriendMarker.place.lat,
+          lng: props.activeFriendMarker.place.lng
+        },
+          zoom: 12
+      }
+    } else {
+      return {
+        center: {
+          lat:  8.495752,
+          lng: -16.842289
+        },
+        zoom: 2.2
+      }
+    }
   }
+
   return(
     <GoogleMap
       zoom={dynamicZoom().zoom}
@@ -49,7 +66,8 @@ const Map = withScriptjs(withGoogleMap( (props) => {
 
 const mapStateToProps = state => ({
   currentUser: state.auth.currentUser,
-  activeMarker: state.places.activeSpot
+  activeMarker: state.places.activeSpot,
+  activeFriendMarker: state.places.activeFriendSpot
 })
 
 
