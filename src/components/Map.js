@@ -47,7 +47,6 @@ const Map = withScriptjs(withGoogleMap( (props) => {
       }
     }
   }
-
   return(
     <GoogleMap
       zoom={dynamicZoom().zoom}

@@ -23,7 +23,6 @@ class MapContainer extends React.Component{
   }
 
   render(){
-    console.log('active spot', this.props.activeSpot)
     const spots = this.props.activeMenu === 'lists' && this.props.activeList ? this.props.activeList.spots : this.props.spots
     return(
       <div className="mapItem">

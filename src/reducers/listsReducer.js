@@ -23,10 +23,16 @@ export default function listsReducer(
           return list.id === action.payload.id ? action.payload : list
         })
       }
-    case 'VOID_ACTIVE_MENU':
+    case 'CHANGE_ACTIVE_MENU':
       return {
         ...state,
         activeList: null
+      }
+    case 'VOID_ACTIVE_MENU':
+      return {
+        ...state,
+        activeList: null,
+        activeListSpots: []
       }
     default:
       return state

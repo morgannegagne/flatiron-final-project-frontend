@@ -59,7 +59,6 @@ export default function placesReducer(
           }
         })
       }
-
     case 'ADD_PHOTO':
       return {
         ...state,
@@ -85,7 +84,7 @@ export default function placesReducer(
     case 'CHANGE_ACTIVE_MARKER':
       return {...state, activeSpot: action.payload, activeMenu: 'spots', sidePanelActive: true, googlePlaces: []}
     case 'CHANGE_ACTIVE_MENU':
-      return {...state, activeMenu: action.payload }
+      return {...state, activeMenu: action.payload, activeSpot: null, activeFriendSpot: null }
     case 'TOGGLE_SIDE_PANEL':
       return {...state, sidePanelActive: !state.sidePanelActive}
     case 'UPDATE_ACTIVE_FRIEND_SPOT':
